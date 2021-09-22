@@ -1,2 +1,2 @@
 language: java<font></font>
-jdk: oraclejdk8
+jdk: oraclejdk11
