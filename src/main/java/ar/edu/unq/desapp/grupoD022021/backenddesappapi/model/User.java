@@ -3,7 +3,7 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "persons")
+@Table(name = "users")
 public class User {
 
     @Id
