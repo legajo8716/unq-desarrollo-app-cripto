@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class authenticationController {
 
     @GetMapping("/login")
-    public boolean login(@RequestBody User user){
+    public boolean login(){
 
         return true;
     }
     @PostMapping("/register")
-    public boolean register(@RequestBody User user){
+    public boolean register(){
 
         return true;
     }
