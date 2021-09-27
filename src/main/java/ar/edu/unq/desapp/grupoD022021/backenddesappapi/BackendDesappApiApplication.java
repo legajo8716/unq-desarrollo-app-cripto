@@ -9,13 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 @SpringBootApplication
-public class BackendDesappApiApplication extends WebSecurityConfigurerAdapter {
+public class BackendDesappApiApplication  {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
-	}
 
 	/** Bean para poder usar apis publicas **/
 	@Bean
