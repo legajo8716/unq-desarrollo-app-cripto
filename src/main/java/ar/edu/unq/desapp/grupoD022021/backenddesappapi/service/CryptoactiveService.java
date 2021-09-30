@@ -1,29 +1,32 @@
-package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
+package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.DollarPrice;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@RestController
-public class CriptoactiveController {
+@Service
+public class CryptoactiveService {
+
+    @Autowired
+    CryptoactiveRepository cryptoactiveRepository;
+
 
     @Autowired
     RestTemplate restTemplate;
 
-    //TODO: Hacer de la lista de cryptos enums
-    @RequestMapping("/api/cryptoassets")
-    public List<Cryptoactive> getCryptoassets(){
+
+    public List<Cryptoactive> getAllCryptoassets(){
         List<Cryptoactive> cryptoassets = new ArrayList<>();
-        List<String> cryptos = new ArrayList<String>();
+        List<String> cryptos = new ArrayList<>();
         cryptos.add("ALICEUSDT");
         cryptos.add("MATICUSDT");
         cryptos.add("AXSUSDT");
@@ -41,16 +44,27 @@ public class CriptoactiveController {
 
         DollarPrice dolarHoy = this.dollarPriceNow();
 
-        //TODO: Preguntar si hay alguna forma de obtener una lista de cryptos con la api de binance
-        //TODO: Pasar el precio de la crypto como el del dolar a coma.
-        //TODO: El date del dolar que se obteien es solo la fecha, no la hora.
-        for ( String crypto: cryptos) {
-            Cryptoactive activo =  restTemplate.getForObject("https://api.binance.com/api/v3/ticker/price?symbol=" + crypto, Cryptoactive.class);
-            activo.setPriceAr(activo.getPrice() * (dolarHoy.getValue()) );
-            activo.setQuoteTime(dolarHoy.getDate());
-            cryptoassets.add(activo);
-        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<List<Cryptoactive>> response =
+                restTemplate.exchange("https://api.binance.com/api/v3/ticker/price?", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Cryptoactive>>() {});
+
+        List<Cryptoactive > result = response.getBody();
+
+        Integer count = 0;
+        Integer next = result.size() - 1 ;
+        while(count < cryptos.size()){
+            Cryptoactive current = result.get( next );
+            if(cryptos.contains(current.getSymbol())){
+                current.setPriceAr(current.getPrice() * (dolarHoy.getValue()) );
+                current.setQuoteTime(dolarHoy.getDate());
+                count++;
+                cryptoassets.add(current);
+            }
+            next--;
+        }
         return cryptoassets;
     }
 
@@ -64,7 +78,6 @@ public class CriptoactiveController {
 
         HttpEntity entity = new HttpEntity(headers);
 
-        //TODO: Preguntar si hay alguna forma de solo obtener la ultima cotizacion del dolar
         ResponseEntity<List<DollarPrice>> response =
                 restTemplate.exchange("https://api.estadisticasbcra.com/usd_of", HttpMethod.GET, entity, new ParameterizedTypeReference<List<DollarPrice>>() {});
 
@@ -73,7 +86,5 @@ public class CriptoactiveController {
 
         return dollarPrice;
     }
+
 }
-
-
-
