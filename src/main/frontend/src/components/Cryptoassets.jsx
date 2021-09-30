@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect } from "react";
-import axios from "axios";
+import React, {  useState, useEffect } from "react";
+import { getQuotes } from "../api/cryptoactive.api"
 
 const Cryptoassets = () => {
 
@@ -11,20 +11,42 @@ const Cryptoassets = () => {
   }, []);
 
   const getCryptoassets = () => {
-    //TODO: Hacer variables de entorno para manejar los llamados a la api
-    axios
-      .get("http://localhost:8080/api/cryptoassets")
-      .then((result) => {
-        setCryptoassets(result.data.data);
+    getQuotes().then((result) => {
+        setCryptoassets(result.data);
       })
       .catch(console.log);
   };
 
     return (
         <>
-        <h2>Esto es el listado de crypto activos</h2>
-           
-        </>
+        <h2>Listado de crypto activos</h2>
+        <div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Price USD</th>
+              <th>Price AR</th>
+              <th>Quote Time</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {cryptoassets.map(crypto => {
+              return (
+                <tr key={crypto.id}>
+                  <td>{crypto.symbol}</td>
+                  <td>{crypto.price}</td>
+                  <td>{crypto.priceAr}</td>
+                  <td>{crypto.quoteTime}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      </>
     )
 }
 
