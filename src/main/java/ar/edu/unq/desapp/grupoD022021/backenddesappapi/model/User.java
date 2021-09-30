@@ -23,14 +23,13 @@ public class User {
     private Integer CVU;
     @Column(name = "wallet", nullable = false, length = 8)
     private Integer wallet;
-
     @Column(name = "awarded_points")
     private Integer awardedPoints;
     @Column(name = "number_of_operations")
     private Integer numberOfOperations;
 
-    public User(Integer id, String name, String lastname, String email, Integer direction, String password, Integer CVU, Integer wallet) {
-        this.id = id;
+    public User( String name, String lastname, String email, Integer direction, String password, Integer CVU, Integer wallet) {
+
         this.name = name;
         this.lastname = lastname;
         this.email = email;
@@ -42,5 +41,45 @@ public class User {
 
     public User() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Integer getDirection() {
+        return direction;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Integer getCVU() {
+        return CVU;
+    }
+
+    public Integer getWallet() {
+        return wallet;
+    }
+
+    public Integer getAwardedPoints() {
+        return awardedPoints;
+    }
+
+    public Integer getNumberOfOperations() {
+        return numberOfOperations;
     }
 }

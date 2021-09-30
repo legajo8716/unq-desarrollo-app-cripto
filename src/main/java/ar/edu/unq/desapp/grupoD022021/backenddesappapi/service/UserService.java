@@ -22,4 +22,12 @@ public class UserService {
     public List<User> findAll() {
         return this.repository.findAll();
     }
+
+    public boolean existsUser(String email) {
+        return this.repository.existsByEmail(email);
+    }
+
+    public User findByEmail(String email) {
+        return this.repository.findByEmail(email);
+    }
 }
