@@ -17,7 +17,7 @@ public class User {
     private String email;
     @Column(name = "direction", nullable = false, length = 8)
     private Integer direction;
-    @Column(name = "password", nullable = false, length = 8)
+    @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "cvu", nullable = false, length = 22)
     private Integer cvu;

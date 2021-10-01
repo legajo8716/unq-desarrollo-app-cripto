@@ -32,7 +32,7 @@ public class authenticationController {
                                 user.getDirection(),
                                 passwordEncoder.encode(user.getPassword()),
                                 user.getCVU(), user.getWallet());
-        userService.save(user);
+        userService.save(newUser);
         return true;
     }
 
