@@ -22,9 +22,7 @@ const Register = () => {
         })
     }
 
-    const enviarDatos = () => {
-        console.log('enviando datos...' )
-    }
+
 
     const register = () => {
         postRegister(datos).then((result) => {
