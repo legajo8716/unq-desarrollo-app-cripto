@@ -11,9 +11,13 @@ export const postRegister=(user)=>{
     return axios.post(`http://${host}/register`,user)
 }
 
-
+export const postLogin=(user)=>{
+    console.log(user)
+    return axios.post(`http://${host}/authenticate`,user)
+}
 export default {
     postRegister,
-    getQuotes
+    getQuotes,
+    postLogin
 
 };
