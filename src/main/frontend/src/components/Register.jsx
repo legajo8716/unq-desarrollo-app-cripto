@@ -1,6 +1,7 @@
 import React,{useState}from "react";
 import {useHistory} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
+import { postRegister } from "../api/cryptoactive.api"
 
 const Register = () => {
     const [datos, setDatos] = useState({
@@ -24,10 +25,17 @@ const Register = () => {
     const enviarDatos = () => {
         console.log('enviando datos...' )
     }
+
+    const register = () => {
+        postRegister(datos).then((result) => {
+            alert("registrado con exito")
+        })
+            .catch(console.log);
+    };
     return (
         <>
 
-                <Form onSubmit={enviarDatos}>
+                <Form onSubmit={register}>
                     <Form.Group className="mb-3"  onChange={handleInputChange} >
                         <Form.Label>Nombre</Form.Label>
                         <Form.Control type="string" placeholder="Ingrese su nombre" name="name" />

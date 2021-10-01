@@ -6,7 +6,14 @@ const host = "localhost:8080";
 export const getQuotes = () => {
     return axios.get(`http://${host}/api/cryptoassets`);
 }
+export const postRegister=(user)=>{
+    console.log(user)
+    return axios.post(`http://${host}/register`,user)
+}
+
 
 export default {
+    postRegister,
     getQuotes
+
 };
