@@ -19,8 +19,8 @@ public class User {
     private Integer direction;
     @Column(name = "password", nullable = false, length = 8)
     private String password;
-    @Column(name = "CVU", nullable = false, length = 22)
-    private Integer CVU;
+    @Column(name = "cvu", nullable = false, length = 22)
+    private Integer cvu;
     @Column(name = "wallet", nullable = false, length = 8)
     private Integer wallet;
     @Column(name = "awarded_points")
@@ -28,14 +28,14 @@ public class User {
     @Column(name = "number_of_operations")
     private Integer numberOfOperations;
 
-    public User( String name, String lastname, String email, Integer direction, String password, Integer CVU, Integer wallet) {
+    public User( String name, String lastname, String email, Integer direction, String password, Integer cvu, Integer wallet) {
 
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.direction = direction;
         this.password = password;
-        this.CVU = CVU;
+        this.cvu = cvu;
         this.wallet = wallet;
     }
 
@@ -68,7 +68,7 @@ public class User {
     }
 
     public Integer getCVU() {
-        return CVU;
+        return cvu;
     }
 
     public Integer getWallet() {
