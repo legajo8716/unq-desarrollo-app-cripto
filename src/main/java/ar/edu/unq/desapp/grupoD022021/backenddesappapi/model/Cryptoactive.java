@@ -29,8 +29,7 @@ public class Cryptoactive {
     @Column
     private String quoteTime;
 
-    public Cryptoactive(Integer id, String symbol, String price) {
-        this.id = id;
+    public Cryptoactive(String symbol, String price) {
         this.symbol = symbol;
         this.price = Double.parseDouble(price);
         this.priceAr = null;
