@@ -3,6 +3,8 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.DollarPrice;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -44,19 +46,22 @@ public class CryptoactiveService {
 
         DollarPrice dolarHoy = this.dollarPriceNow();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        ResponseEntity<List> result = (restTemplate.getForEntity("https://api.binance.com/api/v3/ticker/price?", List.class));
 
-        HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<List<Cryptoactive>> response =
-                restTemplate.exchange("https://api.binance.com/api/v3/ticker/price?", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Cryptoactive>>() {});
+//        List<Cryptoactive> ctypro = (List<Cryptoactive>) (restTemplate.getForObject("https://api.binance.com/api/v3/ticker/price?", List.class));
+        ObjectMapper mapper = new ObjectMapper();
+//        List<Cryptoactive> myObjects = mapper.convertValue(ctypro, new TypeReference<List<Cryptoactive>>(){});
 
-        List<Cryptoactive > result = response.getBody();
+        List<Cryptoactive> myObjects = result.getBody();
+     //   ObjectMapper mapper2= new ObjectMapper();
+        List<Cryptoactive> cryptoassetsWithoutFilter = mapper.convertValue(myObjects, new TypeReference<List<Cryptoactive>>(){});
+
+
 
         Integer count = 0;
-        Integer next = result.size() - 1 ;
+        Integer next = cryptoassetsWithoutFilter.size() - 1 ;
         while(count < cryptos.size()){
-            Cryptoactive current = result.get( next );
+            Cryptoactive current = cryptoassetsWithoutFilter.get( next );
             if(cryptos.contains(current.getSymbol())){
                 current.setPriceAr(current.getPrice() * (dolarHoy.getValue()) );
                 current.setQuoteTime(dolarHoy.getDate());
