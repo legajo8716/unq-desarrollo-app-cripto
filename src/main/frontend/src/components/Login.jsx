@@ -11,27 +11,23 @@ const Login = () => {
 
     })
     const handleInputChange = (event) => {
-         console.log(event.target.name)
-         console.log(event.target.value)
-        setDatos({
+         setDatos({
             ...datos,
             [event.target.name] : event.target.value
         })
-        console.log(localStorage)
-
-    }
+      }
 
 
 
-    const login = () => {
+    const login = (event) => {
+        event.preventDefault()
         postLogin(datos).then((result) => {
-
             localStorage.setItem("token", result.data.token);
-            console.log(localStorage.getItem("Token"))
-
+            var token=localStorage.getItem("token")
+            console.log(token)
             alert("logeado con exito")
         })
-            .catch(console.log);
+            .catch(alert("Login incorrecto"));
     };
 
     return (

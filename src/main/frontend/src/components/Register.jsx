@@ -6,7 +6,7 @@ import { postRegister } from "../api/cryptoactive.api"
 const Register = () => {
     const [datos, setDatos] = useState({
         name: '',
-        lastName: '',
+        lastname: '',
         email:'',
         direction:'',
         password:'',
@@ -40,7 +40,7 @@ const Register = () => {
                     </Form.Group>
                     <Form.Group className="mb-3"   onChange={handleInputChange}>
                         <Form.Label>Apellido</Form.Label>
-                        <Form.Control type="string" placeholder="Ingrese su nombre" name="lastName"/>
+                        <Form.Control type="string" placeholder="Ingrese su nombre" name="lastname"/>
                     </Form.Group>
                     <Form.Group className="mb-3"   onChange={handleInputChange}>
                     <Form.Label>Email </Form.Label>
