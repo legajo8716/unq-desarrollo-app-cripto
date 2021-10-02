@@ -7,11 +7,13 @@ const Cryptoassets = () => {
     const [cryptoassets, setCryptoassets] = useState([]);
 
   useEffect(() => {
+    console.log('alive')
     getCryptoassets();
   }, []);
 
   const getCryptoassets = () => {
     getQuotes().then((result) => {
+
         setCryptoassets(result.data);
       })
       .catch(console.log);

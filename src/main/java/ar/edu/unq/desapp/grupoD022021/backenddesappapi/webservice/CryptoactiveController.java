@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000","https://crypto-active-app.herokuapp.com/"})
 public class CryptoactiveController {
 
     @Autowired
@@ -18,6 +17,8 @@ public class CryptoactiveController {
 
     //TODO: Hacer de la lista de cryptos enums
     @RequestMapping("/api/cryptoassets")
+    @CrossOrigin
+
     public List<Cryptoactive> getCryptoassets() {
         return cryptoactiveService.getAllCryptoassets();
     }
