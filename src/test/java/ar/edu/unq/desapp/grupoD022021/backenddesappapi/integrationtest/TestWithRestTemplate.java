@@ -1,21 +1,15 @@
-package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
+package ar.edu.unq.desapp.grupoD022021.backenddesappapi.integrationtest;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.BackendDesappApiApplication;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.integrationtest.TestConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

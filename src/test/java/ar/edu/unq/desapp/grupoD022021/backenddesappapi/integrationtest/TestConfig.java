@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
+package ar.edu.unq.desapp.grupoD022021.backenddesappapi.integrationtest;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
