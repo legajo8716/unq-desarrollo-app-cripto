@@ -48,12 +48,9 @@ public class CryptoactiveService {
 
         ResponseEntity<List> result = (restTemplate.getForEntity("https://api.binance.com/api/v3/ticker/price?", List.class));
 
-//        List<Cryptoactive> ctypro = (List<Cryptoactive>) (restTemplate.getForObject("https://api.binance.com/api/v3/ticker/price?", List.class));
         ObjectMapper mapper = new ObjectMapper();
-//        List<Cryptoactive> myObjects = mapper.convertValue(ctypro, new TypeReference<List<Cryptoactive>>(){});
 
         List<Cryptoactive> myObjects = result.getBody();
-     //   ObjectMapper mapper2= new ObjectMapper();
         List<Cryptoactive> cryptoassetsWithoutFilter = mapper.convertValue(myObjects, new TypeReference<List<Cryptoactive>>(){});
 
 
