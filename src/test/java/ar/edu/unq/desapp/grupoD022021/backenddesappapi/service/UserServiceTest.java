@@ -13,14 +13,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
-
-    @RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
     @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
     @ContextConfiguration(classes = SpringTestConfig.class)
     public class UserServiceTest {
@@ -48,12 +49,28 @@ import static org.mockito.BDDMockito.given;
                return this.repository.findByEmail(email);
            }*/
         @Test
-        public void save() throws Exception {
+        public void save() {
             User newUser = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", 12345678, 12345678);
             given(userRepository.save(newUser)).willReturn(newUser);
             userService.save(newUser);
             assertEquals(userService.save(newUser), newUser);
 
         }
+        @Test
+        public void findAll() {
+            User user = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", 12345678, 12345678);
+            ArrayList<User> userList=new ArrayList<>();
+            userList.add(user);
+            given(userRepository.findAll()).willReturn(userList);
+            ArrayList<User> userListRetorned= (ArrayList<User>) userService.findAll();
+            assertEquals(userList, userListRetorned);
 
+        }
+        @Test
+        public void existsUser() {
+            String email="nel@gmail.com";
+            given(userRepository.existsByEmail(email)).willReturn(true);
+            assertTrue("OK",userService.existsUser(email));
+
+        }
     }
