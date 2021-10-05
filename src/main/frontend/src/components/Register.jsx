@@ -1,5 +1,5 @@
 import React,{useState}from "react";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
 import { postRegister } from "../api/cryptoactive.api"
 
@@ -22,11 +22,16 @@ const Register = () => {
         })
     }
 
+    const history = useHistory();
 
-
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault();
         postRegister(datos).then((result) => {
+        setTimeout(() => {
             alert("registrado con exito")
+            history.push('/login')
+        }, 5000);
+           
         })
             .catch(console.log);
     };
@@ -66,6 +71,11 @@ const Register = () => {
                 <Button variant="primary" type="submit">
                     Registrarme
                 </Button>
+                <Link to = "/login">
+                     <Button variant="warning">
+                         Back
+                    </Button>
+                </Link>
             </Form>
         </>
     )

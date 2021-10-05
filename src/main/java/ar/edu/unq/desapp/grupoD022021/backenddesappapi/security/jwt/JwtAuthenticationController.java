@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,6 +9,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +24,12 @@ public class JwtAuthenticationController {
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     @CrossOrigin
@@ -44,5 +53,18 @@ public class JwtAuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+    @PostMapping("/register")
+    @CrossOrigin
+
+    public boolean register(@RequestBody User user) {
+        User newUser = new User(user.getName(),
+                user.getLastname(),
+                user.getEmail(),
+                user.getDirection(),
+                passwordEncoder.encode(user.getPassword()),
+                user.getCVU(), user.getWallet());
+        userService.save(newUser);
+        return true;
     }
 }

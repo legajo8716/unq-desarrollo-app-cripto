@@ -17,6 +17,7 @@ const Routes = () => {
                     <Route path="/register" component = {Register}/>
                     <Route path="/home" component= {Home}/>
                     <Route path="/cryptoassets" component= {Cryptoassets}/>
+                    <Route path="/" component= {Login}/>
                 </Switch>
             </BrowserRouter>
         </>

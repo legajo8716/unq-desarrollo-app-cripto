@@ -4,17 +4,10 @@ const host = "localhost:8080";
 
 
 
-
 export const getQuotes = () => {
 
 
-    return  axios.get(`http://${host}/api/cryptoassets`,{
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("token")
-
-
-        }
-    })
+    return  axios.get(`http://${host}/api/cryptoassets`,{  headers:{'Authorization': 'Bearer ' + localStorage.getItem("token")}})
         .then((response) => {
             return response
         })

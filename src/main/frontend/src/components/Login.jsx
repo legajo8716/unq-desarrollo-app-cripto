@@ -1,7 +1,8 @@
 import React ,{useState}from "react";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Form,Button} from 'react-bootstrap';
 import { postLogin } from "../api/cryptoactive.api"
+import Register from "./Register";
 
 const Login = () => {
 
@@ -18,16 +19,18 @@ const Login = () => {
       }
 
 
+    const history = useHistory();
 
     const login = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         postLogin(datos).then((result) => {
             localStorage.setItem("token", result.data.token);
             var token=localStorage.getItem("token")
             console.log(token)
             alert("logeado con exito")
+            history.push('/cryptoassets')
         })
-            .catch(alert("Login incorrecto"));
+
     };
 
     return (
@@ -51,6 +54,11 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <Link to ="/register" >                  
+                    <Button variant="secondary">
+                        Register
+                    </Button>
+                </Link>
             </Form>
         </>
     )
