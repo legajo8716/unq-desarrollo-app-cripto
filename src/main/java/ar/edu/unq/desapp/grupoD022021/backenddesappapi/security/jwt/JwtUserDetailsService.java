@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.CryptoactiveService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
+
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         if (userService.existsUser(email)) {
