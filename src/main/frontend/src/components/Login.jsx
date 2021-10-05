@@ -22,7 +22,6 @@ const Login = () => {
     const history = useHistory();
 
     const login = (event) => {
-        event.preventDefault()
         postLogin(datos).then((result) => {
             localStorage.setItem("token", result.data.token);
             var token=localStorage.getItem("token")
@@ -30,7 +29,7 @@ const Login = () => {
             alert("logeado con exito")
             history.push('/cryptoassets')
         })
-            .catch(alert("Login incorrecto"));
+
     };
 
     return (

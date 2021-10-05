@@ -2,13 +2,12 @@ import axios from "axios";
 
 const host = "localhost:8080";
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem("token")
 
 
 export const getQuotes = () => {
 
 
-    return  axios.get(`http://${host}/api/cryptoassets`)
+    return  axios.get(`http://${host}/api/cryptoassets`,{  headers:{'Authorization': 'Bearer ' + localStorage.getItem("token")}})
         .then((response) => {
             return response
         })
