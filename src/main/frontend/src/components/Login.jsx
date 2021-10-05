@@ -1,7 +1,8 @@
 import React ,{useState}from "react";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Form,Button} from 'react-bootstrap';
 import { postLogin } from "../api/cryptoactive.api"
+import Register from "./Register";
 
 const Login = () => {
 
@@ -51,6 +52,11 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <Link to ="/register" >                  
+                    <Button variant="secondary">
+                        Register
+                    </Button>
+                </Link>
             </Form>
         </>
     )
