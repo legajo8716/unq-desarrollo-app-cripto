@@ -21,14 +21,13 @@ const Login = () => {
 
 
     const login = (event) => {
-        event.preventDefault()
         postLogin(datos).then((result) => {
             localStorage.setItem("token", result.data.token);
             var token=localStorage.getItem("token")
             console.log(token)
             alert("logeado con exito")
         })
-            .catch(alert("Login incorrecto"));
+
     };
 
     return (
