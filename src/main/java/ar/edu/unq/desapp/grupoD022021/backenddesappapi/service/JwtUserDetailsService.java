@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt;
+package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.CryptoactiveService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;

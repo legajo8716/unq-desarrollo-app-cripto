@@ -1,6 +1,10 @@
-package ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt;
+package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtResponse;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtTokenUtil;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.JwtUserDetailsService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

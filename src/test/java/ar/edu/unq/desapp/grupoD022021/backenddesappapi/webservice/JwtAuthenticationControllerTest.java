@@ -1,15 +1,12 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtTokenUtil;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtUserDetailsService;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.CryptoactiveService;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.JwtUserDetailsService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,16 +18,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;

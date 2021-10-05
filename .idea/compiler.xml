@@ -6,15 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="backend-desapp-api" />
         <module name="unq-desarrollo-app-cripto" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="backend-desapp-api" target="1.8" />
       <module name="unq-desarrollo-app-cripto" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="backend-desapp-api" options="-parameters" />
       <module name="unq-desarrollo-app-cripto" options="-parameters" />
     </option>
   </component>
