@@ -7,6 +7,7 @@ install:
 
 before_install:
   - chmod +x mvnw
+<<<<<<< HEAD
   addons:
     sonarcloud:
       organization: "legajo8716-github"
@@ -18,3 +19,16 @@ before_install:
 script:
   # other script steps might be done before running the actual analysis
   - sonar-scanner
+=======
+
+
+addons:
+  sonarcloud:
+    organization: "legajo8716"
+    token:
+      secure: "187116892e462e63a55f4def3b95d435993c27ec" # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+>>>>>>> e5899ca4bb32dc06ab1c247f3f6778ecf8a0ec31

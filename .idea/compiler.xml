@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="backend-desapp-api" />
         <module name="unq-desarrollo-app-cripto" />
+        <module name="backend-desapp-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
