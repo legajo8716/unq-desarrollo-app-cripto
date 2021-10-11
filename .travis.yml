@@ -7,3 +7,15 @@ install:
 
 before_install:
   - chmod +x mvnw
+
+
+  addons:
+    sonarcloud:
+      organization: "legajo8716-github"
+      token:
+        secure: "d8d7e9ccc61dadacc68f6dbbe649570ad24c6fa3"
+      branches:
+        - master
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
