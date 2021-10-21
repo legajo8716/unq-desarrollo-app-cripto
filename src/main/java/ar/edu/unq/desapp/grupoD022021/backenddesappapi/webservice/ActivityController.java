@@ -15,6 +15,8 @@ import java.util.List;
 public class ActivityController  {
     @Autowired
     ActivityService activityService ;
+    @RequestMapping("/activities")
+    @CrossOrigin
     public List<Activity> getAllActivity() {
         return activityService.getAllActivity();
     }
