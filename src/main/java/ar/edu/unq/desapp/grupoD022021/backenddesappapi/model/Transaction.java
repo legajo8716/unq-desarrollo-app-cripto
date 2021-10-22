@@ -8,16 +8,16 @@ public class Transaction {
         @GeneratedValue(strategy = GenerationType.AUTO)
         int id;
         int hour;
-        Cryptoactive cryptoactive;
+        String cryptoactive;
         int cantidad;
-        User usuarioVendedor;
-        User usuarioComprador;
+        String usuarioVendedor;
+        String usuarioComprador;
 
     public Transaction(){
 
         }
 
-    public Transaction(int hour, Cryptoactive cryptoactive, int cantidad, User usuarioVendedor) {
+    public Transaction(int hour, String cryptoactive, int cantidad, String usuarioVendedor) {
         this.hour = hour;
         this.cryptoactive = cryptoactive;
         this.cantidad = cantidad;

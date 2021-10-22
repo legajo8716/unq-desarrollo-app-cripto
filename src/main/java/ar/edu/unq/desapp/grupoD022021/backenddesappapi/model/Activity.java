@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -9,8 +10,10 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     int hour;
-    Cryptoactive cryptoactive;
+    String cryptoactive;
     int cantidad;
-    User usuario;
+    String usuario;
 
+    public Activity() {
+    }
 }
