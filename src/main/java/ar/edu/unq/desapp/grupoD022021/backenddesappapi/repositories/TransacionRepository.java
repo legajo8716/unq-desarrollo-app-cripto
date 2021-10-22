@@ -1,0 +1,13 @@
+package ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories;
+
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Transaction;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+
+
+public interface TransacionRepository  extends CrudRepository<Transaction, Integer> {
+    List<Transaction> findAll();
+
+}
