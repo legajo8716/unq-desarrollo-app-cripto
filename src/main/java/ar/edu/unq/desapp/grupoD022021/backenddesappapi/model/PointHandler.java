@@ -1,13 +1,15 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
-import java.time.LocalDateTime;
+import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+@Component
 public class PointHandler {
 // Todo:Ver donde se puede setear estos valores para no tener que dejarlos harcodeados
-    int cantTimeOnSecondExpired =30*60;
-    int cantPointNotExpired=10;
-    int cantPointExpired=5;
-    int cantPointCancel=0;
+    private int cantTimeOnSecondExpired =30*60;
+    private int cantPointNotExpired=10;
+    private int cantPointExpired=5;
+    private int cantPointCancel=0;
 
     public PointHandler(int cantTimeOnSecond, int cantPointNotExpired, int cantPointExpired, int cantPointCancel) {
         this.cantTimeOnSecondExpired = cantTimeOnSecond;
@@ -36,7 +38,12 @@ public class PointHandler {
     public int getPointCancelTransaction(Transaction transaction){
         return cantPointCancel;
     }
-
+    public int getReputacion(User user) {
+        if (user.getNumberOfOperations() >0)
+            return user.getAwardedPoints() / user.getNumberOfOperations();
+        else
+            return 0;
+    }
 
 
 }

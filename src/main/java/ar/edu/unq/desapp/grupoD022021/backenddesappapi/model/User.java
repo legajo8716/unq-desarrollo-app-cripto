@@ -27,7 +27,11 @@ public class User {
     private Integer awardedPoints;
     @Column(name = "number_of_operations")
     private Integer numberOfOperations;
+    @Column(name = "point_negative")
+    private Integer pointNegative;
 
+    @Column(name = "reputation")
+    private float reputation;
     public User( String name, String lastname, String email, Integer direction, String password, Integer cvu, Integer wallet) {
 
         this.name = name;
@@ -95,8 +99,19 @@ public class User {
         this.awardedPoints = awardedPoints;
     }
 
+    public float getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(float reputation) {
+        this.reputation = reputation;
+    }
     public void sumTransactionConfirmed() {
         this.numberOfOperations++;
 
+    }
+
+    public void sumAwardedPoints(int point) {
+        this.awardedPoints=this.awardedPoints+point;
     }
 }

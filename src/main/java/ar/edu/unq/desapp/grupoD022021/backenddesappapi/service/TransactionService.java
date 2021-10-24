@@ -1,7 +1,10 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.PointHandler;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Transaction;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.TransactionRepository;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,10 @@ import java.util.List;
 public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
-
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    PointHandler pointHandler;
     public List<Transaction> getAllTransaction() {
         return transactionRepository.findAll();
     }
@@ -30,8 +36,24 @@ public class TransactionService {
     }
     public void transactionConfirmation(Transaction transaction){
         Transaction transactionUpdate=transaction;
-        transactionUpdate.confirm();//
+        User usuarioCompradorUpdate=transaction.getUsuarioComprador();
+        User usuarioVendedorUpdate=transaction.getUsuarioVendedor();
+        usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transaction));
+        usuarioCompradorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transaction));
+        transactionUpdate.confirm();
+        userRepository.save(usuarioCompradorUpdate);
+        userRepository.save(usuarioVendedorUpdate);
         transactionRepository.save(transactionUpdate);
+
     }
 
+    public void transactionCancell(Transaction transaction,User userTransactionCancelled){
+        User userUpdate=userTransactionCancelled;
+        userUpdate.setReputation(pointHandler.getReputacion(userUpdate)-20);
+
+
+        transactionRepository.delete(transaction);
+
+
+    }
 }
