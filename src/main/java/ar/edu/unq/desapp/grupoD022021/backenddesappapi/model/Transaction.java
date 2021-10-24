@@ -2,6 +2,8 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -13,8 +15,8 @@ public class Transaction {
         Date hour;
         String cryptoactive;
         int cantidad;
-        String usuarioVendedor;
-        String usuarioComprador;
+        User usuarioVendedor;
+        User usuarioComprador;
         Boolean isFinalished=false;
 
     public Boolean getFinalished() {
@@ -41,11 +43,11 @@ public class Transaction {
         return cantidad;
     }
 
-    public String getUsuarioVendedor() {
+    public User getUsuarioVendedor() {
         return usuarioVendedor;
     }
 
-    public String getUsuarioComprador() {
+    public User getUsuarioComprador() {
         return usuarioComprador;
     }
 
@@ -62,11 +64,22 @@ public class Transaction {
         this.cantidad = cantidad;
     }
 
-    public void setUsuarioVendedor(String usuarioVendedor) {
+    public void setUsuarioVendedor(User usuarioVendedor) {
         this.usuarioVendedor = usuarioVendedor;
     }
 
-    public void setUsuarioComprador(String usuarioComprador) {
+    public void setUsuarioComprador(User usuarioComprador) {
         this.usuarioComprador = usuarioComprador;
+    }
+
+    public void confirm() {
+        this.isFinalished=true;
+        this.usuarioComprador.sumTransactionConfirmed();
+    }
+
+    public void sumTransactionConfirmed() {
+        this.usuarioComprador.sumTransactionConfirmed();
+        this.usuarioVendedor.sumTransactionConfirmed();
+
     }
 }

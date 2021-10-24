@@ -90,4 +90,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setAwardedPoints(Integer awardedPoints) {
+        this.awardedPoints = awardedPoints;
+    }
+
+    public void sumTransactionConfirmed() {
+        this.numberOfOperations++;
+
+    }
 }
