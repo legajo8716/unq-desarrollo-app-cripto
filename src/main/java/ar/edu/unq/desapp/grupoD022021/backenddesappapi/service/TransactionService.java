@@ -21,8 +21,7 @@ public class TransactionService {
     }
     public void addTransaccion(Transaction transaction){
          Transaction newTransaction= new Transaction();
-         Date date = new Date();
-         newTransaction.setHour(date);
+         Date date = new Date();newTransaction.setHour(date);
          newTransaction.setCantidad(transaction.getCantidad());
          newTransaction.setUsuarioVendedor(transaction.getUsuarioVendedor());
          newTransaction.setUsuarioComprador(transaction.getUsuarioComprador());
@@ -31,9 +30,7 @@ public class TransactionService {
     }
     public void transactionConfirmation(Transaction transaction){
         Transaction transactionUpdate=transaction;
-        transactionUpdate.confirm();
-        transactionUpdate.sumTransactionConfirmed();
-
+        transactionUpdate.confirm();//
         transactionRepository.save(transactionUpdate);
     }
 
