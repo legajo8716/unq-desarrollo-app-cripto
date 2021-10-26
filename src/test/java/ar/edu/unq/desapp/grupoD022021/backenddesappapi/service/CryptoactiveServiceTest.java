@@ -95,13 +95,13 @@ public class CryptoactiveServiceTest {
         mocklist.add(cryp14);
 
         List<DollarPrice> dollarPriceListMock = new ArrayList<>();
-        DollarPrice dollarPrice1 = new DollarPrice("2000-05-24", 2.0);
-        DollarPrice dollarPrice2 = new DollarPrice("2000-05-24", 2.0);
+        DollarPrice dollarPrice1 = new DollarPrice( "2.0");
+        DollarPrice dollarPrice2 = new DollarPrice( "2.0");
         dollarPriceListMock.add(dollarPrice1);
         dollarPriceListMock.add(dollarPrice2);
 
         mockServer.expect(ExpectedCount.once(),
-                        requestTo(new URI("https://api.estadisticasbcra.com/usd_of")))
+                        requestTo(new URI("https://www.dolarsi.com/api/api.php?type=valoresprincipales")))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)

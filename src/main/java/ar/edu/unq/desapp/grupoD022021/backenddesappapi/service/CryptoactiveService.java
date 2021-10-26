@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CryptoactiveService {
@@ -61,7 +62,7 @@ public class CryptoactiveService {
             Cryptoactive current = cryptoassetsWithoutFilter.get( next );
             if(cryptos.contains(current.getSymbol())){
                 current.setPriceAr(current.getPrice() * (dolarHoy.getValue()) );
-                current.setQuoteTime(dolarHoy.getDate());
+                current.setQuoteTime();
                 count++;
                 cryptoassets.add(current);
             }
@@ -75,16 +76,16 @@ public class CryptoactiveService {
 
         /**La unica forma de realizar el llamado a la api del BCRA **/
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjQwMzAwNjEsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJwYWJsbzk3NzU4QGdtYWlsLmNvbSJ9.-mN1KnN1aiznnQwyqKyZCdmMKGOHIgwluJU819JA0nm1gTzYQcNzwluLGvwP6GJKQccdlK_o_EtsnEecmjwxKg");
+        //headers.set("Authorization", "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjQwMzAwNjEsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJwYWJsbzk3NzU4QGdtYWlsLmNvbSJ9.-mN1KnN1aiznnQwyqKyZCdmMKGOHIgwluJU819JA0nm1gTzYQcNzwluLGvwP6GJKQccdlK_o_EtsnEecmjwxKg");
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
         HttpEntity entity = new HttpEntity(headers);
 
-        ResponseEntity<List<DollarPrice>> response =
-                restTemplate.exchange("https://api.estadisticasbcra.com/usd_of", HttpMethod.GET, entity, new ParameterizedTypeReference<List<DollarPrice>>() {});
+        ResponseEntity<List<Map<String, DollarPrice>>> response =
+                restTemplate.exchange("https://www.dolarsi.com/api/api.php?type=valoresprincipales", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Map<String, DollarPrice>>>() {});
 
         /**El precio actual del dolar**/
-        DollarPrice dollarPrice = response.getBody().get(response.getBody().size() - 1);
+        DollarPrice dollarPrice = response.getBody().get(0).get("casa");
 
         return dollarPrice;
     }
