@@ -20,7 +20,7 @@ public class TransactionController {
         TransactionService transactionService ;
         @RequestMapping("/transaction")
         @CrossOrigin
-        public List<Activity> getAllActivity() {
+        public List<Transaction> getAllActivity() {
             return transactionService.getAllTransaction();
         }
         @RequestMapping("/addtransaction")
