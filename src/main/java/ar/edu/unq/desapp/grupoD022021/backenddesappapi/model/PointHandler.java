@@ -3,6 +3,7 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+
 @Component
 public class PointHandler {
 // Todo:Ver donde se puede setear estos valores para no tener que dejarlos harcodeados
@@ -11,12 +12,12 @@ public class PointHandler {
     private int cantPointExpired=5;
     private int cantPointCancel=0;
 
-    public PointHandler(int cantTimeOnSecond, int cantPointNotExpired, int cantPointExpired, int cantPointCancel) {
-        this.cantTimeOnSecondExpired = cantTimeOnSecond;
-        this.cantPointNotExpired = cantPointNotExpired;
-        this.cantPointExpired = cantPointExpired;
-        this.cantPointCancel = cantPointCancel;
-    }
+   // public PointHandler(int cantTimeOnSecond, int cantPointNotExpired, int cantPointExpired, int cantPointCancel) {
+     //   this.cantTimeOnSecondExpired = cantTimeOnSecond;
+       // this.cantPointNotExpired = cantPointNotExpired;
+        //this.cantPointExpired = cantPointExpired;
+       // this.cantPointCancel = cantPointCancel;
+    //}
 
     public int getPointConfirmTransaction(Transaction transaction){
         LocalDateTime now = LocalDateTime.now();

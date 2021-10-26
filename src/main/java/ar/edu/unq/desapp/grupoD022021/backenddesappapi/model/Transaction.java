@@ -15,7 +15,9 @@ public class Transaction {
         Date hour;
         String cryptoactive;
         int cantidad;
+        @ManyToOne
         User usuarioVendedor;
+        @ManyToOne
         User usuarioComprador;
         Boolean isFinalished=false;
 
