@@ -17,4 +17,9 @@ public class ActivityService {
     public List<Activity> getAllActivity() {
         return activityRepository.findAll();
     }
+    public boolean deleteActivity(int id){
+       return activityRepository.delete(id);
+    }
+
+
 }

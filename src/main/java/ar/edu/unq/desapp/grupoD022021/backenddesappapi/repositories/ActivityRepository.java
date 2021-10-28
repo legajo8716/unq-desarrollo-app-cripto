@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface ActivityRepository extends CrudRepository<Activity, Integer> {
     List<Activity> findAll();
+    boolean delete(int id);
 
 }
