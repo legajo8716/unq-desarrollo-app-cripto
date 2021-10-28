@@ -24,19 +24,19 @@ public class TransactionController {
         }
         @PostMapping("/addtransaction")
         @CrossOrigin
-        public void addTransaccion(@RequestBody Transaction transaction){
+        public void addTransaccion(@RequestBody TransactionDTO transaction){
                 transactionService.addTransaccion(transaction);
 
         }
         @PostMapping("/confirmtransaction")
         @CrossOrigin
-        public void confirmtransaction(@RequestBody Transaction transaction){
+        public void confirmtransaction(@RequestBody TransactionDTO transaction){
                 transactionService.transactionConfirmation(transaction);
 
         }
         @PostMapping("/cancelltransaction")
         @CrossOrigin
-        public void cancelltransaction(@RequestBody Transaction transaction, User userCancell){
+        public void cancelltransaction(@RequestBody TransactionDTO transaction, User userCancell){
                 transactionService.transactionCancell(transaction,userCancell);
 
         }
@@ -44,7 +44,7 @@ public class TransactionController {
         @GetMapping("/usertransaction")
         @CrossOrigin
         public void getTransactionthatUser(@RequestBody Transaction transaction, User userCancell){
-                transactionService.getTransactionThatUser(userCancell.getId());
+              //  transactionService.getTransactionThatUser(userCancell.getId());
 
         }
     }
