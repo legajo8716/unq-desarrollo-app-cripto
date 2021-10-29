@@ -3,6 +3,7 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.ActivityRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
@@ -17,6 +18,8 @@ import java.util.List;
 public class ActivityService {
     @Autowired
     ActivityRepository activityRepository;
+    @Autowired
+
     UserRepository userRepository;
 
     public List<Activity> getAllActivity() {
@@ -28,7 +31,8 @@ public class ActivityService {
 
         Date date = new Date();
         Activity newActivity= new Activity();
-        newActivity.setUsuario(userRepository.findById(activityDto.getIdUsuario()));
+        User usuario=userRepository.findById(activityDto.getIdUsuario());
+        newActivity.setUsuario(usuario);
         newActivity.setCryptoactive(activityDto.getCryptoactive());
         newActivity.setHour(date);
         newActivity.setCantidad(activityDto.getCantidad());
