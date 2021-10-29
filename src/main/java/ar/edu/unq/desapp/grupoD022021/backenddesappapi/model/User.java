@@ -28,7 +28,7 @@ public class User {
     @Column(name = "number_of_operations")
     private Integer numberOfOperations;
     @Column(name = "point_negative")
-    private Integer pointNegative;
+    private Double pointNegative;
 
     @Column(name = "reputation")
     private float reputation;
@@ -41,6 +41,9 @@ public class User {
         this.password = password;
         this.cvu = cvu;
         this.wallet = wallet;
+        this.numberOfOperations=0;
+        this.pointNegative=0.0;
+        this.awardedPoints=0;
     }
 
     public User() {

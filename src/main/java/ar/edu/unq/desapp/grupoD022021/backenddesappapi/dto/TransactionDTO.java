@@ -28,6 +28,10 @@ public class TransactionDTO {
         this.isFinalished = isFinalished;
     }
 
+    public TransactionDTO() {
+
+    }
+
     public int getId() {
         return id;
     }
