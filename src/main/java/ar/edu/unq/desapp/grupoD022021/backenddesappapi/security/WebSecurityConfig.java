@@ -77,7 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();
-        httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/users","/h2/**","/register/**","/authenticate/**","/api/cryptoassets", "/swagger-ui/**")
+        httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/users","/usertransaction/**","/h2/**","/init/**","/addtransaction/**",
+                "/confirmtransaction/**","/cancelltransaction/**","/transaction/**","/register/**","/authenticate/**","/api/cryptoassets", "/swagger-ui/**")
                 .permitAll().anyRequest().authenticated().and().
                         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

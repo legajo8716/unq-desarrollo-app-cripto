@@ -8,6 +8,7 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.TransactionR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +24,24 @@ public class TransactionService {
 
     @Autowired
     PointHandler pointHandler;
-    public List<Transaction> getAllTransaction() {
-        return transactionRepository.findAll();
+    public List<TransactionDTO> getAllTransaction() {
+        List<Transaction> transactionList=transactionRepository.findAll();
+        List<TransactionDTO> transactionDTOList=new ArrayList<TransactionDTO>();
+
+        for (Transaction transaction : transactionList){
+            TransactionDTO transactionDTOAux= new TransactionDTO();
+            transactionDTOAux.setId(transaction.getId());
+            transactionDTOAux.setCryptoactive(transaction.getCryptoactive());
+
+            transactionDTOAux.setHour(transaction.getHour());
+            transactionDTOAux.setFinalished(transaction.getFinalished());
+            transactionDTOAux.setIdUserComprador(transaction.getUsuarioComprador().getId());
+            transactionDTOAux.setIdUserVendedor(transaction.getUsuarioVendedor().getId());
+            transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " "+ transaction.getUsuarioComprador().getLastname());
+            transactionDTOAux.setUsuarioVendedor(transaction.getUsuarioVendedor().getName() + " "+ transaction.getUsuarioVendedor().getLastname());
+            transactionDTOList.add(transactionDTOAux);
+        }
+        return transactionDTOList;
     }
     public void addTransaccion(TransactionDTO transaction){
          Transaction newTransaction= new Transaction();
@@ -54,9 +71,9 @@ public class TransactionService {
 
 
     }
-   public List<Transaction> getTransactionThatUser(Integer id) {
-        List<Transaction> transactionsResult = Stream.concat(transactionRepository.findByUsuarioCompradorId(id).stream(),
-                                                  transactionRepository.findByUsuarioCompradorId(id).stream())
+   public List<Transaction> getTransactionThatUser(User user) {
+        List<Transaction> transactionsResult = Stream.concat(transactionRepository.findByUsuarioCompradorId(user.getId()).stream(),
+                                                  transactionRepository.findByUsuarioCompradorId(user.getId()).stream())
                 .collect(Collectors.toList());
         return transactionsResult ;
     }

@@ -19,7 +19,7 @@ public class TransactionController {
         TransactionService transactionService ;
         @RequestMapping("/transaction")
         @CrossOrigin
-        public List<Transaction> getAllActivity() {
+        public List<TransactionDTO> getAllTransaction() {
             return transactionService.getAllTransaction();
         }
         @PostMapping("/addtransaction")
@@ -43,8 +43,8 @@ public class TransactionController {
 
         @GetMapping("/usertransaction")
         @CrossOrigin
-        public void getTransactionthatUser(@RequestBody Transaction transaction, User userCancell){
-              //  transactionService.getTransactionThatUser(userCancell.getId());
+        public void getTransactionthatUser(@RequestBody  User user){
+                transactionService.getTransactionThatUser(user.getId());
 
         }
     }
