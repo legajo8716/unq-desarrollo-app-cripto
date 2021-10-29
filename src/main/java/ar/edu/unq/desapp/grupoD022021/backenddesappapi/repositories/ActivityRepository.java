@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ActivityRepository extends CrudRepository<Activity, Integer> {
     List<Activity> findAll();
-
+    Activity findById(int idActivity);
 }
