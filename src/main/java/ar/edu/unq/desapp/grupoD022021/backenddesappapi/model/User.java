@@ -50,7 +50,7 @@ public class User {
 
     }
 
-    public User getId() {
+    public Integer getId() {
         return id;
     }
 

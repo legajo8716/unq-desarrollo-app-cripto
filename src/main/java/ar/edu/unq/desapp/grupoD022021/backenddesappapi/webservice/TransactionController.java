@@ -1,11 +1,8 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Transaction;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.ActivityService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +40,8 @@ public class TransactionController {
 
         @GetMapping("/usertransaction")
         @CrossOrigin
-        public void getTransactionthatUser(@RequestBody  User user){
-                transactionService.getTransactionThatUser(user.getId());
+        public List<Transaction> getTransactionthatUser(@RequestBody  User user){
+              return  transactionService.getTransactionThatUser(user.getId());
 
         }
     }

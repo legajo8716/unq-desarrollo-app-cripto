@@ -68,12 +68,10 @@ public class TransactionService {
         User userUpdate=userTransactionCancelled;
         userUpdate.setReputation(pointHandler.getReputacion(userUpdate)-20);
         transactionRepository.deleteById(transaction.getId());
-
-
     }
-   public List<Transaction> getTransactionThatUser(User user) {
-        List<Transaction> transactionsResult = Stream.concat(transactionRepository.findByUsuarioCompradorId(user.getId()).stream(),
-                                                  transactionRepository.findByUsuarioCompradorId(user.getId()).stream())
+   public List<Transaction> getTransactionThatUser(int idUser) {
+        List<Transaction> transactionsResult = Stream.concat(transactionRepository.findByUsuarioCompradorId(idUser).stream(),
+                                                  transactionRepository.findByUsuarioVendedorId(idUser).stream())
                 .collect(Collectors.toList());
         return transactionsResult ;
     }
