@@ -31,16 +31,21 @@ public class ActivityService {
 
         Date date = new Date();
         Activity newActivity= new Activity();
-        User usuario=userRepository.findById(activityDto.getIdUsuario());
+        User usuario=userRepository.findByEmail(activityDto.getEmailUser());
         newActivity.setUsuario(usuario);
         newActivity.setCryptoactive(activityDto.getCryptoactive());
         newActivity.setHour(date);
         newActivity.setCantidad(activityDto.getCantidad());
+        newActivity.setAction(activityDto.getAction());
         activityRepository.save(newActivity);
     }
 
-    public Activity getActivity(int idActivity) {
-        return activityRepository.findById(idActivity);
+    public ActivityDto getActivity(int idActivity) {
+        Activity activityWanted=activityRepository.findById(idActivity);
+        ActivityDto activityDto= new ActivityDto();
+        activityDto.setId(activityWanted.getId());
+        activityDto.setAction(activityWanted.getAction());
+        return activityDto ;
     }
 
     public void finishActivity(int idActivity) {

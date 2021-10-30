@@ -23,16 +23,16 @@ public class ActivityController  {
     }
 
 
-    @RequestMapping("/addactivity")
+
+    @PostMapping("/addactivity")
     @CrossOrigin
     public void addActivity(@RequestBody ActivityDto activityDto) {
         activityService.addActivity(activityDto); }
     @RequestMapping("/activitytotransaction")
     @CrossOrigin
     public void convertActivityToTransaction(@RequestParam int idActivity, @RequestParam int idUser){
-        Activity actividadAux=activityService.getActivity(idActivity);
+        ActivityDto actividadAux=activityService.getActivity(idActivity);
         TransactionDTO transactionDTO=new TransactionDTO();
-        transactionDTO.setIdUserVendedor(actividadAux.getUsuario().getId());
         transactionDTO.setIdUserComprador(idUser);
         transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
         transactionDTO.setCantidad(actividadAux.getCantidad());

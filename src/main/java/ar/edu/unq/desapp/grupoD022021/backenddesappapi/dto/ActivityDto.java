@@ -14,7 +14,8 @@ public class ActivityDto  {
         String cryptoactive;
         int cantidad;
         String usuario;
-        int idUsuario;
+        String action;
+        String emailUser;
 
         public ActivityDto() {
         }
@@ -67,11 +68,19 @@ public class ActivityDto  {
         this.usuario = usuario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getEmailUser() {
+        return emailUser;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 }

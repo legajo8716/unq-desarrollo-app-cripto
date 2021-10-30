@@ -15,6 +15,7 @@ public class Activity {
     int cantidad;
     @ManyToOne
     User usuario;
+    String action;
 
     public Activity() {
     }
@@ -57,5 +58,13 @@ public class Activity {
 
     public void setUsuario(User usuario) {
         this.usuario = usuario;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 }
