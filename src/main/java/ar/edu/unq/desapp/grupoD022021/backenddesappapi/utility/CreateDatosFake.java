@@ -2,18 +2,9 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.utility;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtResponse;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtTokenUtil;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
@@ -38,8 +29,8 @@ public class CreateDatosFake {
         TransactionDTO transactionDTO=new TransactionDTO();
         transactionDTO.setCantidad(10);
         transactionDTO.setCryptoactive("Bitcoin");
-        transactionDTO.setIdUserComprador(userService.findByEmail("nel@gmail.com").getId());
-        transactionDTO.setIdUserComprador(userService.findByEmail("nes@gmail.com").getId());
+        transactionDTO.setEmailUserComprador(userService.findByEmail("nel@gmail.com").getId());
+        transactionDTO.setEmailUserComprador(userService.findByEmail("nes@gmail.com").getId());
 
         transactionService.addTransaccion(transactionDTO);
     }

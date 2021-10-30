@@ -2,7 +2,6 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.ActivityService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class ActivityController  {
     TransactionService transactionService ;
     @RequestMapping("/activities")
     @CrossOrigin
-    public List<Activity> getAllActivity() {
+    public List<ActivityDto>  getAllActivity() {
         return activityService.getAllActivity();
     }
 
@@ -33,7 +32,7 @@ public class ActivityController  {
     public void convertActivityToTransaction(@RequestParam int idActivity, @RequestParam int idUser){
         ActivityDto actividadAux=activityService.getActivity(idActivity);
         TransactionDTO transactionDTO=new TransactionDTO();
-        transactionDTO.setIdUserComprador(idUser);
+        transactionDTO.setEmailUserComprador(idUser);
         transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
         transactionDTO.setCantidad(actividadAux.getCantidad());
         transactionService.addTransaccion(transactionDTO);

@@ -40,8 +40,8 @@ public class TransactionController {
 
         @GetMapping("/usertransaction")
         @CrossOrigin
-        public List<Transaction> getTransactionthatUser(@RequestBody  User user){
-              return  transactionService.getTransactionThatUser(user.getId());
+        public List<TransactionDTO> getTransactionthatUser(@RequestParam  String email){
+              return  transactionService.getTransactionThatUser(email);
 
         }
     }

@@ -1,32 +1,23 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto;
 
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import java.util.Date;
 
 public class ActivityDto  {
 
         int id;
-        int hour;
+        Date hour;
         String cryptoactive;
         int cantidad;
-        String usuario;
+        String fullNameUser;
+        int numberOperations;
+        double reputation;
         String action;
         String emailUser;
 
         public ActivityDto() {
         }
 
-    public ActivityDto(int id, int hour, String cryptoactive, int cantidad, String usuario) {
-        this.id = id;
-        this.hour = hour;
-        this.cryptoactive = cryptoactive;
-        this.cantidad = cantidad;
-        this.usuario = usuario;
-    }
+
 
     public int getId() {
         return id;
@@ -36,11 +27,11 @@ public class ActivityDto  {
         this.id = id;
     }
 
-    public int getHour() {
+    public Date getHour() {
         return hour;
     }
 
-    public void setHour(int hour) {
+    public void setHour(Date hour) {
         this.hour = hour;
     }
 
@@ -60,12 +51,12 @@ public class ActivityDto  {
         this.cantidad = cantidad;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getFullNameUser() {
+        return fullNameUser;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setFullNameUser(String fullNameUser) {
+        this.fullNameUser = fullNameUser;
     }
 
     public String getEmailUser() {
@@ -82,5 +73,21 @@ public class ActivityDto  {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public int getNumberOperations() {
+        return numberOperations;
+    }
+
+    public void setNumberOperations(int numberOperations) {
+        this.numberOperations = numberOperations;
+    }
+
+    public double getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(double reputation) {
+        this.reputation = reputation;
     }
 }

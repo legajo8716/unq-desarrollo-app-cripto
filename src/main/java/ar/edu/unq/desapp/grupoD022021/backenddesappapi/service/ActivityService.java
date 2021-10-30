@@ -1,8 +1,10 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Transaction;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.ActivityRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -22,13 +25,27 @@ public class ActivityService {
 
     UserRepository userRepository;
 
-    public List<Activity> getAllActivity() {
-        return activityRepository.findAll();
+    public List<ActivityDto> getAllActivity() {
+        List<Activity> activityList = activityRepository.findAll();
+        List<ActivityDto> activityListDto = new ArrayList<ActivityDto>();
+
+        for (Activity activity : activityList) {
+            User userAux = userRepository.findByEmail(activity.getUsuario().getEmail());
+            ActivityDto activityDTOAux = new ActivityDto();
+            activityDTOAux.setId(activity.getId());
+            activityDTOAux.setCryptoactive(activity.getCryptoactive());
+            activityDTOAux.setAction(activity.getAction());
+            activityDTOAux.setHour(activity.getHour());
+            activityDTOAux.setCantidad(activity.getCantidad());
+            activityDTOAux.setFullNameUser(userAux.getName() + " " + userAux.getLastname());
+            activityDTOAux.setReputation(userAux.getReputation());
+            activityDTOAux.setNumberOperations(userAux.getNumberOfOperations());
+            activityListDto.add(activityDTOAux);
+        }
+        return activityListDto;
     }
 
-
     public void addActivity(ActivityDto activityDto) {
-
         Date date = new Date();
         Activity newActivity= new Activity();
         User usuario=userRepository.findByEmail(activityDto.getEmailUser());

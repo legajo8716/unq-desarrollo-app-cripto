@@ -1,8 +1,5 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto;
 
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
-
-import javax.persistence.ManyToOne;
 import java.util.Date;
 
 public class TransactionDTO {
@@ -11,20 +8,20 @@ public class TransactionDTO {
     String cryptoactive;
     int cantidad;
     String usuarioVendedor;
-    int idUserVendedor;
+    String emailUserVendedor;
     String usuarioComprador;
-    int idUserComprador;
+    String emailUserComprador;
     Boolean isFinalished=false;
 
-    public TransactionDTO(int id, Date hour, String cryptoactive, int cantidad, String usuarioVendedor, int idUserVendedor, String usuarioComprador, int idUserComprador, Boolean isFinalished) {
+    public TransactionDTO(int id, Date hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished) {
         this.id = id;
         this.hour = hour;
         this.cryptoactive = cryptoactive;
         this.cantidad = cantidad;
         this.usuarioVendedor = usuarioVendedor;
-        this.idUserVendedor = idUserVendedor;
+        this.emailUserVendedor = emailUserVendedor;
         this.usuarioComprador = usuarioComprador;
-        this.idUserComprador = idUserComprador;
+        this.emailUserComprador = emailUserComprador;
         this.isFinalished = isFinalished;
     }
 
@@ -84,20 +81,20 @@ public class TransactionDTO {
         return isFinalished;
     }
 
-    public int getIdUserVendedor() {
-        return idUserVendedor;
+    public String getEmailUserVendedor() {
+        return emailUserVendedor;
     }
 
-    public void setIdUserVendedor(int idUserVendedor) {
-        this.idUserVendedor = idUserVendedor;
+    public void setEmailUserVendedor(String emailUserVendedor) {
+        this.emailUserVendedor = emailUserVendedor;
     }
 
-    public int getIdUserComprador() {
-        return idUserComprador;
+    public String getEmailUserComprador() {
+        return emailUserComprador;
     }
 
-    public void setIdUserComprador(int idUserComprador) {
-        this.idUserComprador = idUserComprador;
+    public void setEmailUserComprador(String emailUserComprador) {
+        this.emailUserComprador = emailUserComprador;
     }
 
     public void setFinalished(Boolean finalished) {

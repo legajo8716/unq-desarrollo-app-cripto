@@ -14,7 +14,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     List<Transaction> findAll();
     Transaction findById(int id);
     boolean deleteById(int id);
-    List<Transaction> findByUsuarioCompradorId (Integer idUser);
+    List<Transaction> findByUsuarioCompradorEmail (String email);
 
     List<Transaction> findByUsuarioVendedorId (Integer idUser);
 }
