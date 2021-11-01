@@ -34,7 +34,6 @@ public class TransactionService {
          Date date = new Date();newTransaction.setHour(date);
          newTransaction.setCantidad(transaction.getCantidad());
          newTransaction.setUsuarioVendedor(userService.findByEmail(transaction.getEmailUserVendedor()));
-         newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));
          newTransaction.setCryptoactive(transaction.getCryptoactive());
          transactionRepository.save(newTransaction);
     }
@@ -57,24 +56,23 @@ public class TransactionService {
     }
    public List<TransactionDTO> getTransactionThatUser(String email) {
         List<Transaction> transactionList = Stream.concat(transactionRepository.findByUsuarioCompradorEmail(email).stream(),
-                                                  transactionRepository.findByUsuarioCompradorEmail(email).stream())
+                                                  transactionRepository.findByUsuarioVendedorEmail(email).stream())
                 .collect(Collectors.toList());
 
         return this.convertDtoList(transactionList) ;
     }
     public List<TransactionDTO> convertDtoList(List<Transaction> transactionList){
         List<TransactionDTO> transactionDTOList=new ArrayList<TransactionDTO>();
-
         for (Transaction transaction : transactionList){
             TransactionDTO transactionDTOAux= new TransactionDTO();
             transactionDTOAux.setId(transaction.getId());
             transactionDTOAux.setCryptoactive(transaction.getCryptoactive());
-
             transactionDTOAux.setHour(transaction.getHour());
             transactionDTOAux.setFinalished(transaction.getFinalished());
-            transactionDTOAux.setEmailUserComprador(transaction.getUsuarioComprador().getEmail());
+
+           // transactionDTOAux.setEmailUserComprador(transaction.getUsuarioComprador().getEmail());
             transactionDTOAux.setEmailUserVendedor(transaction.getUsuarioVendedor().getEmail());
-            transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " "+ transaction.getUsuarioComprador().getLastname());
+         //   transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " "+ transaction.getUsuarioComprador().getLastname());
             transactionDTOAux.setUsuarioVendedor(transaction.getUsuarioVendedor().getName() + " "+ transaction.getUsuarioVendedor().getLastname());
             transactionDTOList.add(transactionDTOAux);
         }

@@ -25,15 +25,7 @@ public class CreateDatosFake {
 
         userService.save(newUser);
     }
-    public void generationTransaction(){
-        TransactionDTO transactionDTO=new TransactionDTO();
-        transactionDTO.setCantidad(10);
-        transactionDTO.setCryptoactive("Bitcoin");
-        transactionDTO.setEmailUserComprador(userService.findByEmail("nel@gmail.com").getId());
-        transactionDTO.setEmailUserComprador(userService.findByEmail("nes@gmail.com").getId());
 
-        transactionService.addTransaccion(transactionDTO);
-    }
 
 
 

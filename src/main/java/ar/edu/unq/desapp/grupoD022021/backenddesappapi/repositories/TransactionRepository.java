@@ -17,4 +17,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     List<Transaction> findByUsuarioCompradorEmail (String email);
 
     List<Transaction> findByUsuarioVendedorId (Integer idUser);
+
+    List<Transaction>  findByUsuarioVendedorEmail(String email);
 }

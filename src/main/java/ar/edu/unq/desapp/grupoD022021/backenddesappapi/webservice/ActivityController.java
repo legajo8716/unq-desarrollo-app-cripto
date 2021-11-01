@@ -29,11 +29,11 @@ public class ActivityController  {
         activityService.addActivity(activityDto); }
     @RequestMapping("/activitytotransaction")
     @CrossOrigin
-    public void convertActivityToTransaction(@RequestParam int idActivity, @RequestParam int idUser){
+    public void convertActivityToTransaction(@RequestParam int idActivity, String emailUser){
         ActivityDto actividadAux=activityService.getActivity(idActivity);
         TransactionDTO transactionDTO=new TransactionDTO();
-        transactionDTO.setEmailUserComprador(idUser);
         transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
+        transactionDTO.setEmailUserVendedor(emailUser);
         transactionDTO.setCantidad(actividadAux.getCantidad());
         transactionService.addTransaccion(transactionDTO);
         activityService.finishActivity(idActivity);
