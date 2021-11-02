@@ -38,7 +38,7 @@ public class ActivityService {
             activityDTOAux.setHour(activity.getHour());
             activityDTOAux.setCantidad(activity.getCantidad());
             activityDTOAux.setFullNameUser(userAux.getName() + " " + userAux.getLastname());
-            activityDTOAux.setReputation(userAux.getReputation());
+            activityDTOAux.setReputation(userAux.getAwardedPoints());
             activityDTOAux.setNumberOperations(userAux.getNumberOfOperations());
             activityListDto.add(activityDTOAux);
         }
@@ -54,6 +54,8 @@ public class ActivityService {
         newActivity.setHour(date);
         newActivity.setCantidad(activityDto.getCantidad());
         newActivity.setAction(activityDto.getAction());
+        newActivity.setNumberOfOperations(usuario.getNumberOfOperations());
+        newActivity.setAwardedPoints(usuario.getAwardedPoints());
         activityRepository.save(newActivity);
     }
 
@@ -67,7 +69,7 @@ public class ActivityService {
         activityDto.setCryptoactive(activityWanted.getCryptoactive());
         activityDto.setAction(activityWanted.getAction());
         activityDto.setNumberOperations(activityWanted.getUsuario().getNumberOfOperations());
-        activityDto.setReputation(activityWanted.getUsuario().getReputation());
+        activityDto.setReputation(activityWanted.getUsuario().getAwardedPoints());
 
 
         return activityDto ;

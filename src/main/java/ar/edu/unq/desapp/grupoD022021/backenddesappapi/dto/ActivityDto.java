@@ -10,7 +10,7 @@ public class ActivityDto  {
         int cantidad;
         String fullNameUser;
         int numberOperations;
-        double reputation;
+        int reputation;
         String action;
         String emailUser;
 
@@ -87,7 +87,7 @@ public class ActivityDto  {
         return reputation;
     }
 
-    public void setReputation(double reputation) {
+    public void setReputation(int reputation) {
         this.reputation = reputation;
     }
 }
