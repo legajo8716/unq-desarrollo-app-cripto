@@ -31,11 +31,11 @@ public class TransactionController {
                 transactionService.transactionConfirmation(idTransaction);
 
         }
+
         @PostMapping("/cancelltransaction")
         @CrossOrigin
-        public void cancelltransaction(@RequestBody TransactionDTO transaction, User userCancell){
-                transactionService.transactionCancell(transaction,userCancell);
-
+        public void cancelltransaction(@RequestBody int idTransaction){
+                transactionService.transactionCancell(idTransaction);
         }
 
         @GetMapping("/usertransaction")

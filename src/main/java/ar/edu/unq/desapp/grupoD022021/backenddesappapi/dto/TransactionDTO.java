@@ -11,9 +11,12 @@ public class TransactionDTO {
     String emailUserVendedor;
     String usuarioComprador;
     String emailUserComprador;
+    String action;
+    String shippingAddress;
     Boolean isFinalished=false;
 
-    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished) {
+
+    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action) {
         this.id = id;
         this.hour = hour;
         this.cryptoactive = cryptoactive;
@@ -23,6 +26,9 @@ public class TransactionDTO {
         this.usuarioComprador = usuarioComprador;
         this.emailUserComprador = emailUserComprador;
         this.isFinalished = isFinalished;
+        this.shippingAddress = shippingAddress;
+        this.action = action;
+
     }
 
     public TransactionDTO() {
@@ -99,5 +105,21 @@ public class TransactionDTO {
 
     public void setFinalished(Boolean finalished) {
         isFinalished = finalished;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 }

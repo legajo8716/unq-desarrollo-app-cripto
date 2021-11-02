@@ -20,6 +20,7 @@ public class Transaction {
         @ManyToOne
         User usuarioComprador;
         Boolean isFinalished=false;
+        String shippingAddress;
 
     public Boolean getFinalished() {
         return isFinalished;
@@ -91,5 +92,17 @@ public class Transaction {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String action) {
+        if(action.length() == ("purchase").length()){
+            this.shippingAddress = usuarioVendedor.getWallet();
+        } else if(action.length() == ("sale").length()) {
+            this.shippingAddress = usuarioVendedor.getCVU();
+        }
     }
 }

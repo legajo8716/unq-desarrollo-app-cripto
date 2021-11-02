@@ -34,14 +34,16 @@ public class TransactionService {
     public void addTransaccion(TransactionDTO transaction){
          Transaction newTransaction= new Transaction();
         String date = "";
+        User sellerUser = userService.findByEmail(transaction.getEmailUserVendedor());
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         date = dtf.format(now);
          newTransaction.setHour(date);
          newTransaction.setCantidad(transaction.getCantidad());
-         newTransaction.setUsuarioVendedor(userService.findByEmail(transaction.getEmailUserVendedor()));
+         newTransaction.setUsuarioVendedor(sellerUser);
         newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));
+        newTransaction.setShippingAddress(transaction.getAction());
 
         newTransaction.setCryptoactive(transaction.getCryptoactive());
          transactionRepository.save(newTransaction);
@@ -58,11 +60,14 @@ public class TransactionService {
         transactionRepository.save(transactionUpdate);
     }
 
-    public void transactionCancell(TransactionDTO transaction, User userTransactionCancelled){
-        User userUpdate=userTransactionCancelled;
+    public void transactionCancell(int idTransaction){
+        Transaction transaction=transactionRepository.findById(idTransaction);
+        User userUpdate = transaction.getUsuarioVendedor();
         userUpdate.setReputation(pointHandler.getReputacion(userUpdate)-20);
+        userService.save(userUpdate);
         transactionRepository.deleteById(transaction.getId());
     }
+
    public List<TransactionDTO> getTransactionThatUser(String email) {
           return this.convertDtoList(transactionRepository.findByUsuarioVendedorEmail(email)) ;
     }
@@ -81,6 +86,7 @@ public class TransactionService {
                 transactionDTOAux.setEmailUserComprador(transaction.getUsuarioComprador().getEmail());
                 transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " " + transaction.getUsuarioComprador().getLastname());
             }
+            transactionDTOAux.setShippingAddress(transaction.getShippingAddress());
             transactionDTOList.add(transactionDTOAux);
         }
         return transactionDTOList;

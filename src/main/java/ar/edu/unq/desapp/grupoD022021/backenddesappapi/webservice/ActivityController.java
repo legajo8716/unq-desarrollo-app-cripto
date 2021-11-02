@@ -36,6 +36,7 @@ public class ActivityController  {
         transactionDTO.setEmailUserVendedor(actividadAux.getEmailUser());
         transactionDTO.setEmailUserComprador(emailUser);
         transactionDTO.setCantidad(actividadAux.getCantidad());
+        transactionDTO.setAction(actividadAux.getAction());
         transactionService.addTransaccion(transactionDTO);
         activityService.finishActivity(idActivity);
 

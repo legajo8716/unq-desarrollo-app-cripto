@@ -13,6 +13,7 @@ public class ActivityDto  {
         int reputation;
         String action;
         String emailUser;
+        int shippingAddress;
 
         public ActivityDto() {
         }
@@ -89,5 +90,13 @@ public class ActivityDto  {
 
     public void setReputation(int reputation) {
         this.reputation = reputation;
+    }
+
+    public int getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(int shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 }
