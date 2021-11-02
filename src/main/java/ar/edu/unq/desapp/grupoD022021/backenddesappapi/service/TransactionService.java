@@ -63,6 +63,7 @@ public class TransactionService {
         List<TransactionDTO> transactionDTOList=new ArrayList<TransactionDTO>();
         for (Transaction transaction : transactionList){
             TransactionDTO transactionDTOAux= new TransactionDTO();
+            transactionDTOAux.setCantidad(transaction.getCantidad());
             transactionDTOAux.setId(transaction.getId());
             transactionDTOAux.setCryptoactive(transaction.getCryptoactive());
             transactionDTOAux.setHour(transaction.getHour());
