@@ -44,6 +44,7 @@ public class TransactionService {
          newTransaction.setUsuarioVendedor(sellerUser);
         newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));
         newTransaction.setShippingAddress(transaction.getAction());
+        newTransaction.setReputation(sellerUser.getAwardedPoints());
 
         newTransaction.setCryptoactive(transaction.getCryptoactive());
          transactionRepository.save(newTransaction);
@@ -87,6 +88,7 @@ public class TransactionService {
                 transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " " + transaction.getUsuarioComprador().getLastname());
             }
             transactionDTOAux.setShippingAddress(transaction.getShippingAddress());
+            transactionDTOAux.setReputation(transaction.getReputation());
             transactionDTOList.add(transactionDTOAux);
         }
         return transactionDTOList;

@@ -21,6 +21,7 @@ public class Transaction {
         User usuarioComprador;
         Boolean isFinalished=false;
         String shippingAddress;
+        int reputation;
 
     public Boolean getFinalished() {
         return isFinalished;
@@ -104,5 +105,13 @@ public class Transaction {
         } else if(action.length() == ("sale").length()) {
             this.shippingAddress = usuarioVendedor.getCVU();
         }
+    }
+
+    public int getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(int reputation) {
+        this.reputation = reputation;
     }
 }

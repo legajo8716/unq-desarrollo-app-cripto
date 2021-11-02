@@ -84,7 +84,7 @@ public class ActivityDto  {
         this.numberOperations = numberOperations;
     }
 
-    public double getReputation() {
+    public int getReputation() {
         return reputation;
     }
 

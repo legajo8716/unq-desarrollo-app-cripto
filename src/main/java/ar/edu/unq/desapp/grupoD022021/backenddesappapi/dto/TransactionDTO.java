@@ -13,10 +13,11 @@ public class TransactionDTO {
     String emailUserComprador;
     String action;
     String shippingAddress;
+    int reputation;
     Boolean isFinalished=false;
 
 
-    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action) {
+    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action, int reputation) {
         this.id = id;
         this.hour = hour;
         this.cryptoactive = cryptoactive;
@@ -28,6 +29,7 @@ public class TransactionDTO {
         this.isFinalished = isFinalished;
         this.shippingAddress = shippingAddress;
         this.action = action;
+        this.reputation = reputation;
 
     }
 
@@ -121,5 +123,13 @@ public class TransactionDTO {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public int getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(int reputation) {
+        this.reputation = reputation;
     }
 }

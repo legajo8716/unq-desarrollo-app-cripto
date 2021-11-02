@@ -15,7 +15,7 @@ public class ActivityController  {
     ActivityService activityService ;
     @Autowired
     TransactionService transactionService ;
-    @RequestMapping("/activities")
+    @GetMapping("/activities")
     @CrossOrigin
     public List<ActivityDto>  getAllActivity() {
         return activityService.getAllActivity();
@@ -27,9 +27,10 @@ public class ActivityController  {
     @CrossOrigin
     public void addActivity(@RequestBody ActivityDto activityDto) {
         activityService.addActivity(activityDto); }
-    @RequestMapping("/activitytotransaction")
+    @PostMapping("/activitytotransaction")
     @CrossOrigin
     public void convertActivityToTransaction(@RequestParam int idActivity, String emailUser){
+        //TODO: Esto va en el service
         ActivityDto actividadAux=activityService.getActivity(idActivity);
         TransactionDTO transactionDTO=new TransactionDTO();
         transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
@@ -37,6 +38,7 @@ public class ActivityController  {
         transactionDTO.setEmailUserComprador(emailUser);
         transactionDTO.setCantidad(actividadAux.getCantidad());
         transactionDTO.setAction(actividadAux.getAction());
+        transactionDTO.setReputation(actividadAux.getReputation());
         transactionService.addTransaccion(transactionDTO);
         activityService.finishActivity(idActivity);
 

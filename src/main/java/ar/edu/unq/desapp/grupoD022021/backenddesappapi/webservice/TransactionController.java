@@ -14,7 +14,7 @@ public class TransactionController {
 
         @Autowired
         TransactionService transactionService ;
-        @RequestMapping("/transaction")
+        @GetMapping("/transaction")
         @CrossOrigin
         public List<TransactionDTO> getAllTransaction() {
             return transactionService.getAllTransaction();
