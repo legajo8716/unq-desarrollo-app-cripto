@@ -19,10 +19,10 @@ public class User {
     private Integer direction;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "cvu", nullable = false, length = 22)
-    private Integer cvu;
+    @Column(name = "cvu", nullable = false)
+    private String cvu;
     @Column(name = "wallet", nullable = false, length = 8)
-    private Integer wallet;
+    private String wallet;
     @Column(name = "awarded_points")
     private Integer awardedPoints;
     @Column(name = "number_of_operations")
@@ -32,7 +32,7 @@ public class User {
 
     @Column(name = "reputation")
     private float reputation;
-    public User( String name, String lastname, String email, Integer direction, String password, Integer cvu, Integer wallet) {
+    public User( String name, String lastname, String email, Integer direction, String password, String cvu, String wallet) {
 
         this.name = name;
         this.lastname = lastname;
@@ -74,11 +74,11 @@ public class User {
         return password;
     }
 
-    public Integer getCVU() {
+    public String getCVU() {
         return cvu;
     }
 
-    public Integer getWallet() {
+    public String getWallet() {
         return wallet;
     }
 
