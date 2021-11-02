@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class TransactionDTO {
     int id;
-    Date hour;
+    String hour;
     String cryptoactive;
     int cantidad;
     String usuarioVendedor;
@@ -13,7 +13,7 @@ public class TransactionDTO {
     String emailUserComprador;
     Boolean isFinalished=false;
 
-    public TransactionDTO(int id, Date hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished) {
+    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished) {
         this.id = id;
         this.hour = hour;
         this.cryptoactive = cryptoactive;
@@ -37,11 +37,11 @@ public class TransactionDTO {
         this.id = id;
     }
 
-    public Date getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public void setHour(Date hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 

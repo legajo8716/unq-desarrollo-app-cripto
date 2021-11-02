@@ -10,7 +10,7 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
-    Date hour;
+    String hour;
     String cryptoactive;
     int cantidad;
     @ManyToOne
@@ -30,11 +30,11 @@ public class Activity {
         this.id = id;
     }
 
-    public Date getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public void setHour(Date hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 

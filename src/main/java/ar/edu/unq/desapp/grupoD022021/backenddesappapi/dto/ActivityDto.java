@@ -5,7 +5,7 @@ import java.util.Date;
 public class ActivityDto  {
 
         int id;
-        Date hour;
+        String hour;
         String cryptoactive;
         int cantidad;
         String fullNameUser;
@@ -27,11 +27,11 @@ public class ActivityDto  {
         this.id = id;
     }
 
-    public Date getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public void setHour(Date hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 

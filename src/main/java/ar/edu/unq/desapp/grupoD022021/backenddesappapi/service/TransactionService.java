@@ -8,6 +8,8 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.TransactionR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +33,12 @@ public class TransactionService {
     }
     public void addTransaccion(TransactionDTO transaction){
          Transaction newTransaction= new Transaction();
-         Date date = new Date();newTransaction.setHour(date);
+        String date = "";
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        date = dtf.format(now);
+         newTransaction.setHour(date);
          newTransaction.setCantidad(transaction.getCantidad());
          newTransaction.setUsuarioVendedor(userService.findByEmail(transaction.getEmailUserVendedor()));
         newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));

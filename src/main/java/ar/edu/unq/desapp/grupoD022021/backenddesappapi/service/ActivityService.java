@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +48,12 @@ public class ActivityService {
     }
 
     public void addActivity(ActivityDto activityDto) {
-        Date date = new Date();
+        String date = "";
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        date = dtf.format(now);
+
         Activity newActivity= new Activity();
         User usuario=userRepository.findByEmail(activityDto.getEmailUser());
         newActivity.setUsuario(usuario);

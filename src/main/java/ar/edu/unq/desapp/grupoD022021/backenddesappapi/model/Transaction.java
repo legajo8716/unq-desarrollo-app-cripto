@@ -12,7 +12,7 @@ public class Transaction {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         int id;
-        Date hour;
+        String hour;
         String cryptoactive;
         int cantidad;
         @ManyToOne
@@ -33,7 +33,7 @@ public class Transaction {
 
         }
 
-    public Date getHour() {
+    public String getHour() {
         return hour;
     }
 
@@ -54,7 +54,7 @@ public class Transaction {
     }
 
 
-    public void setHour(Date hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 
