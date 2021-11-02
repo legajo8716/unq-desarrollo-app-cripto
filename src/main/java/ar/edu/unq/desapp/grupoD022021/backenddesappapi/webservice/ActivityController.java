@@ -33,7 +33,8 @@ public class ActivityController  {
         ActivityDto actividadAux=activityService.getActivity(idActivity);
         TransactionDTO transactionDTO=new TransactionDTO();
         transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
-        transactionDTO.setEmailUserVendedor(emailUser);
+        transactionDTO.setEmailUserVendedor(actividadAux.getEmailUser());
+        transactionDTO.setEmailUserComprador(emailUser);
         transactionDTO.setCantidad(actividadAux.getCantidad());
         transactionService.addTransaccion(transactionDTO);
         activityService.finishActivity(idActivity);

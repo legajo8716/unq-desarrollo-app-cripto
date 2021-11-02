@@ -61,7 +61,15 @@ public class ActivityService {
         Activity activityWanted=activityRepository.findById(idActivity);
         ActivityDto activityDto= new ActivityDto();
         activityDto.setId(activityWanted.getId());
+        activityDto.setEmailUser(activityWanted.getUsuario().getEmail());
+        activityDto.setCantidad(activityWanted.getCantidad());
+        activityDto.setFullNameUser(activityWanted.getUsuario().getName()+" "+activityWanted.getUsuario().getLastname());
+        activityDto.setCryptoactive(activityWanted.getCryptoactive());
         activityDto.setAction(activityWanted.getAction());
+        activityDto.setNumberOperations(activityWanted.getUsuario().getNumberOfOperations());
+        activityDto.setReputation(activityWanted.getUsuario().getReputation());
+
+
         return activityDto ;
     }
 

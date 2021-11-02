@@ -34,11 +34,13 @@ public class TransactionService {
          Date date = new Date();newTransaction.setHour(date);
          newTransaction.setCantidad(transaction.getCantidad());
          newTransaction.setUsuarioVendedor(userService.findByEmail(transaction.getEmailUserVendedor()));
-         newTransaction.setCryptoactive(transaction.getCryptoactive());
+        newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));
+
+        newTransaction.setCryptoactive(transaction.getCryptoactive());
          transactionRepository.save(newTransaction);
     }
-    public void transactionConfirmation(TransactionDTO transaction){
-        Transaction transactionUpdate=transactionRepository.findById(transaction.getId());
+    public void transactionConfirmation(int idTransaction){
+        Transaction transactionUpdate=transactionRepository.findById(idTransaction);
         User usuarioCompradorUpdate=transactionUpdate.getUsuarioComprador();
         User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
         usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
@@ -55,11 +57,7 @@ public class TransactionService {
         transactionRepository.deleteById(transaction.getId());
     }
    public List<TransactionDTO> getTransactionThatUser(String email) {
-        List<Transaction> transactionList = Stream.concat(transactionRepository.findByUsuarioCompradorEmail(email).stream(),
-                                                  transactionRepository.findByUsuarioVendedorEmail(email).stream())
-                .collect(Collectors.toList());
-
-        return this.convertDtoList(transactionList) ;
+          return this.convertDtoList(transactionRepository.findByUsuarioVendedorEmail(email)) ;
     }
     public List<TransactionDTO> convertDtoList(List<Transaction> transactionList){
         List<TransactionDTO> transactionDTOList=new ArrayList<TransactionDTO>();
@@ -69,11 +67,12 @@ public class TransactionService {
             transactionDTOAux.setCryptoactive(transaction.getCryptoactive());
             transactionDTOAux.setHour(transaction.getHour());
             transactionDTOAux.setFinalished(transaction.getFinalished());
-
-           // transactionDTOAux.setEmailUserComprador(transaction.getUsuarioComprador().getEmail());
             transactionDTOAux.setEmailUserVendedor(transaction.getUsuarioVendedor().getEmail());
-         //   transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " "+ transaction.getUsuarioComprador().getLastname());
             transactionDTOAux.setUsuarioVendedor(transaction.getUsuarioVendedor().getName() + " "+ transaction.getUsuarioVendedor().getLastname());
+            if(transaction.getUsuarioComprador()!=null) {
+                transactionDTOAux.setEmailUserComprador(transaction.getUsuarioComprador().getEmail());
+                transactionDTOAux.setUsuarioComprador(transaction.getUsuarioComprador().getName() + " " + transaction.getUsuarioComprador().getLastname());
+            }
             transactionDTOList.add(transactionDTOAux);
         }
         return transactionDTOList;

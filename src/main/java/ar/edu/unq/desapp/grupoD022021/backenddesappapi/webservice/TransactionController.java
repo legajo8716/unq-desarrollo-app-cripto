@@ -27,8 +27,8 @@ public class TransactionController {
         }
         @PostMapping("/confirmtransaction")
         @CrossOrigin
-        public void confirmtransaction(@RequestBody TransactionDTO transaction){
-                transactionService.transactionConfirmation(transaction);
+        public void confirmtransaction(@RequestParam  int idTransaction){
+                transactionService.transactionConfirmation(idTransaction);
 
         }
         @PostMapping("/cancelltransaction")
