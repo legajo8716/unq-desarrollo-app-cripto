@@ -26,8 +26,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -94,14 +95,14 @@ public class CryptoactiveServiceTest {
         mocklist.add(cryp13);
         mocklist.add(cryp14);
 
-        List<DollarPrice> dollarPriceListMock = new ArrayList<>();
-        DollarPrice dollarPrice1 = new DollarPrice("2000-05-24", 2.0);
-        DollarPrice dollarPrice2 = new DollarPrice("2000-05-24", 2.0);
-        dollarPriceListMock.add(dollarPrice1);
-        dollarPriceListMock.add(dollarPrice2);
+        List<Map<String, DollarPrice>> dollarPriceListMock = new ArrayList<>();
+        DollarPrice dollarPrice1 = new DollarPrice( "2.0");
+        HashMap<String, DollarPrice> value = new HashMap<String, DollarPrice>();
+        value.put("casa", dollarPrice1);
+        dollarPriceListMock.add(value);
 
         mockServer.expect(ExpectedCount.once(),
-                        requestTo(new URI("https://api.estadisticasbcra.com/usd_of")))
+                        requestTo(new URI("https://www.dolarsi.com/api/api.php?type=valoresprincipales")))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)

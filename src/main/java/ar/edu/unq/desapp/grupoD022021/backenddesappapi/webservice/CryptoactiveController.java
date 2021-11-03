@@ -5,6 +5,7 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.CryptoactiveServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class CryptoactiveController {
     CryptoactiveService cryptoactiveService ;
 
     @Cacheable(value = "cryptoassets")
-    @RequestMapping("/api/cryptoassets")
+    @GetMapping("/api/cryptoassets")
     @CrossOrigin
     public List<Cryptoactive> getCryptoassets() {
         return cryptoactiveService.getAllCryptoassets();

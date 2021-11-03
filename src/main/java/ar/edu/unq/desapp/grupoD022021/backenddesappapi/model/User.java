@@ -19,16 +19,20 @@ public class User {
     private Integer direction;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "cvu", nullable = false, length = 22)
-    private Integer cvu;
+    @Column(name = "cvu", nullable = false)
+    private String cvu;
     @Column(name = "wallet", nullable = false, length = 8)
-    private Integer wallet;
+    private String wallet;
     @Column(name = "awarded_points")
     private Integer awardedPoints;
     @Column(name = "number_of_operations")
     private Integer numberOfOperations;
+    @Column(name = "point_negative")
+    private Double pointNegative;
 
-    public User( String name, String lastname, String email, Integer direction, String password, Integer cvu, Integer wallet) {
+    @Column(name = "reputation")
+    private float reputation;
+    public User( String name, String lastname, String email, Integer direction, String password, String cvu, String wallet) {
 
         this.name = name;
         this.lastname = lastname;
@@ -37,6 +41,9 @@ public class User {
         this.password = password;
         this.cvu = cvu;
         this.wallet = wallet;
+        this.numberOfOperations=0;
+        this.pointNegative=0.0;
+        this.awardedPoints=0;
     }
 
     public User() {
@@ -67,11 +74,11 @@ public class User {
         return password;
     }
 
-    public Integer getCVU() {
+    public String getCVU() {
         return cvu;
     }
 
-    public Integer getWallet() {
+    public String getWallet() {
         return wallet;
     }
 
@@ -89,5 +96,32 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAwardedPoints(Integer awardedPoints) {
+        this.awardedPoints += awardedPoints;
+    }
+
+    public void setAwardedPointsOfOperationCancelled(int awardedPoints){
+        if(this.awardedPoints - awardedPoints > 0){
+            this.awardedPoints -= awardedPoints;
+        } else {
+            this.awardedPoints = 0;
+        }
+    }
+    public float getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(float reputation) {
+        this.reputation = reputation;
+    }
+    public void sumTransactionConfirmed() {
+        this.numberOfOperations++;
+
+    }
+
+    public void sumAwardedPoints(int point) {
+        this.awardedPoints=this.awardedPoints+point;
     }
 }

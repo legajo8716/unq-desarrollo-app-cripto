@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.SpringTestConfig;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.UserDto;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
@@ -50,7 +52,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
            }*/
         @Test
         public void save() {
-            User newUser = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", 12345678, 12345678);
+            User newUser = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", "12345678", "12345678");
             given(userRepository.save(newUser)).willReturn(newUser);
             userService.save(newUser);
             assertEquals(userService.save(newUser), newUser);
@@ -58,12 +60,14 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
         }
         @Test
         public void findAll() {
-            User user = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", 12345678, 12345678);
-            ArrayList<User> userList=new ArrayList<>();
+            User user = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", "12345678", "12345678");
+            List<User> userList = new ArrayList<>();
             userList.add(user);
             given(userRepository.findAll()).willReturn(userList);
-            ArrayList<User> userListRetorned= (ArrayList<User>) userService.findAll();
-            assertEquals(userList, userListRetorned);
+            List<UserDto> userListRetorned = userService.findAll();
+            UserDto nelsonDto = new UserDto(user);
+            assertEquals(nelsonDto.getName(), userListRetorned.get(0).getName());
+            assertEquals(nelsonDto.getLastName(), userListRetorned.get(0).getLastName());
 
         }
         @Test

@@ -1,9 +1,13 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.UserDto;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.utility.CreateDatosFake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,11 +18,16 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private CreateDatosFake createDatosFake;
     @GetMapping("/api/users")
-    public List<User> allUser(){
-        List<User> users = userService.findAll();
-        return users;
+    public ResponseEntity<List<UserDto>> allUser(){
+        List<UserDto> users = userService.findAll();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+    @GetMapping("/init")
+    public void init(){
+       createDatosFake.generateUser();
     }
 
 }

@@ -8,26 +8,20 @@ import java.time.LocalDateTime;
 /** CLASE PARA PARSEAR EL JSON QUE ME VIENE DE LA API DEL BCRA**/
 public class DollarPrice {
 
-    @JsonProperty("d")
-    private LocalDate date;
-    @JsonProperty("v")
-    private Double value;
 
-    public DollarPrice(String date, Double value) {
+    @JsonProperty("venta")
+    private String value;
 
-        this.date = LocalDate.parse(date);
+    public DollarPrice( String value) {
+
         this.value = value;
     }
 
     public DollarPrice() {   }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
 
     public Double getValue() {
-        return value;
+        return Double.parseDouble(value.replace(',', '.'));
     }
 
 }

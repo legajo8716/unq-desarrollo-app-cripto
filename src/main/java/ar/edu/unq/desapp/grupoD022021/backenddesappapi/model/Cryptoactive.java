@@ -58,7 +58,7 @@ public class Cryptoactive implements Serializable {
         return quoteTime;
     }
 
-    public void setQuoteTime(LocalDate quoteTime) {
+    public void setQuoteTime() {
         /** Anulo el argumento que recibo, xque la cotizacion es en base a la hora que me pidan el listado de cryptos**/
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
