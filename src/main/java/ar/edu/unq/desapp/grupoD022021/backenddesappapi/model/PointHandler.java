@@ -10,7 +10,7 @@ public class PointHandler {
     private int cantTimeOnSecondExpired =30*60;
     private int cantPointNotExpired=10;
     private int cantPointExpired=5;
-    private int cantPointCancel=0;
+    private int cantPointCancel=20;
 
    // public PointHandler(int cantTimeOnSecond, int cantPointNotExpired, int cantPointExpired, int cantPointCancel) {
      //   this.cantTimeOnSecondExpired = cantTimeOnSecond;
@@ -28,7 +28,6 @@ public class PointHandler {
             return this.cantPointNotExpired;
 
     }
-
     private boolean beatsTimeExpired(LocalDateTime now, LocalDateTime created) {
         return now.getYear()==created.getYear()&&
                 now.getMonth()==created.getMonth()&&
@@ -36,7 +35,7 @@ public class PointHandler {
                 now.getHour()*now.getMinute()*now.getSecond()-created.getHour()*created.getMinute()*created.getSecond()<=this.cantTimeOnSecondExpired;
     }
 
-    public int getPointCancelTransaction(Transaction transaction){
+    public int getPointCancelTransaction(){
         return cantPointCancel;
     }
     public int getReputacion(User user) {
