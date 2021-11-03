@@ -99,9 +99,16 @@ public class User {
     }
 
     public void setAwardedPoints(Integer awardedPoints) {
-        this.awardedPoints = awardedPoints;
+        this.awardedPoints += awardedPoints;
     }
 
+    public void setAwardedPointsOfOperationCancelled(int awardedPoints){
+        if(this.awardedPoints - awardedPoints > 0){
+            this.awardedPoints -= awardedPoints;
+        } else {
+            this.awardedPoints = 0;
+        }
+    }
     public float getReputation() {
         return reputation;
     }
