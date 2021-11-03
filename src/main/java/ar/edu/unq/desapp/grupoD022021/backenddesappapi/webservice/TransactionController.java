@@ -34,7 +34,7 @@ public class TransactionController {
 
         @PostMapping("/cancelltransaction")
         @CrossOrigin
-        public void cancelltransaction(@RequestBody int idTransaction){
+        public void cancelltransaction(@RequestParam int idTransaction){
                 transactionService.transactionCancell(idTransaction);
         }
 

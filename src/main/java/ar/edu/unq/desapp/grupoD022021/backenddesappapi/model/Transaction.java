@@ -81,6 +81,10 @@ public class Transaction {
         this.usuarioComprador.sumTransactionConfirmed();
     }
 
+    public void cancel(){
+        this.isFinalished=true;
+    }
+
     public void sumTransactionConfirmed() {
         this.usuarioComprador.sumTransactionConfirmed();
         this.usuarioVendedor.sumTransactionConfirmed();

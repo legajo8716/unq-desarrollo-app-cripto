@@ -63,10 +63,10 @@ public class TransactionService {
 
     public void transactionCancell(int idTransaction){
         Transaction transaction=transactionRepository.findById(idTransaction);
-        User userUpdate = transaction.getUsuarioVendedor();
-        userUpdate.setReputation(pointHandler.getReputacion(userUpdate)-20);
-        userService.save(userUpdate);
-        transactionRepository.deleteById(transaction.getId());
+        transaction.getUsuarioVendedor().setAwardedPoints(30);
+        transaction.getUsuarioVendedor().setAwardedPointsOfOperationCancelled(pointHandler.getPointCancelTransaction());
+        transaction.cancel();
+        transactionRepository.save(transaction);
     }
 
    public List<TransactionDTO> getTransactionThatUser(String email) {
