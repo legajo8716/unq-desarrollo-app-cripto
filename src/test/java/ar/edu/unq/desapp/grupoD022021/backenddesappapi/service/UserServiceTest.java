@@ -52,7 +52,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
            }*/
         @Test
         public void save() {
-            User newUser = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", "12345678", "12345678");
+            User newUser = new User("nelson", "gonzalez", "nel@gmail.com", "12345678", "12345678", "12345678", "12345678");
             given(userRepository.save(newUser)).willReturn(newUser);
             userService.save(newUser);
             assertEquals(userService.save(newUser), newUser);
@@ -60,7 +60,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
         }
         @Test
         public void findAll() {
-            User user = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", "12345678", "12345678");
+            User user = new User("nelson", "gonzalez", "nel@gmail.com", "12345678", "12345678", "12345678", "12345678");
             List<User> userList = new ArrayList<>();
             userList.add(user);
             given(userRepository.findAll()).willReturn(userList);

@@ -61,14 +61,7 @@ public class JwtAuthenticationController {
     @PostMapping("/register")
     @CrossOrigin
 
-    public boolean register(@RequestBody User user) {
-        User newUser = new User(user.getName(),
-                user.getLastname(),
-                user.getEmail(),
-                user.getDirection(),
-                passwordEncoder.encode(user.getPassword()),
-                user.getCVU(), user.getWallet());
-        userService.save(newUser);
-        return true;
+    public ResponseEntity<String> register(@RequestBody User user) {
+        return userService.save(user);
     }
 }

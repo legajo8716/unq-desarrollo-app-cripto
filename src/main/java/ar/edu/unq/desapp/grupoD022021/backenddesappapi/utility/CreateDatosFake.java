@@ -20,8 +20,8 @@ public class CreateDatosFake {
     @Autowired
     TransactionService transactionService;
     public void generateUser(){
-        User newUser=new User("Nelson","Gonzalez","nel@gmail.com",123,"1234567","1234567","1234567");
-        User newUser2=new User("Nestor","Gonzalez","nes@gmail.com",123,"1234567","1234567","1234567");
+        User newUser=new User("Nelson","Gonzalez","nel@gmail.com","123","1234567","1234567","1234567");
+        User newUser2=new User("Nestor","Gonzalez","nes@gmail.com","123","1234567","1234567","1234567");
 
         userService.save(newUser);
     }

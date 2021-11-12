@@ -22,8 +22,7 @@ public class UserController {
     private CreateDatosFake createDatosFake;
     @GetMapping("/api/users")
     public ResponseEntity<List<UserDto>> allUser(){
-        List<UserDto> users = userService.findAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/init")
     public void init(){
