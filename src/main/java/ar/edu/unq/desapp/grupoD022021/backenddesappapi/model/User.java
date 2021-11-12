@@ -15,13 +15,13 @@ public class User {
     private String lastname;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "direction", nullable = false, length = 8)
-    private Integer direction;
+    @Column(name = "direction", nullable = false, length = 30)
+    private String direction;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "cvu", nullable = false)
+    @Column(name = "cvu", nullable = false, length = 22, unique = true)
     private String cvu;
-    @Column(name = "wallet", nullable = false, length = 8)
+    @Column(name = "wallet", nullable = false, length = 8, unique = true)
     private String wallet;
     @Column(name = "awarded_points")
     private Integer awardedPoints;
@@ -32,7 +32,7 @@ public class User {
 
     @Column(name = "reputation")
     private float reputation;
-    public User( String name, String lastname, String email, Integer direction, String password, String cvu, String wallet) {
+    public User( String name, String lastname, String email, String direction, String password, String cvu, String wallet) {
 
         this.name = name;
         this.lastname = lastname;
@@ -66,7 +66,7 @@ public class User {
         return email;
     }
 
-    public Integer getDirection() {
+    public String getDirection() {
         return direction;
     }
 
