@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,11 +22,15 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private List<String> errors = new ArrayList<>();
 
     @Transactional
     public ResponseEntity<String> save(User model) {
         if(validateUser(model)){
+            model.setPassword(passwordEncoder.encode(model.getPassword()));
             repository.save(model);
             return new ResponseEntity<>("Usuario registrado con exito ", HttpStatus.OK);
         }else {
