@@ -31,6 +31,8 @@ public class UserService {
     public ResponseEntity<String> save(User model) {
         if(validateUser(model)){
             model.setPassword(passwordEncoder.encode(model.getPassword()));
+            model.initializeAwardedPoints();
+            model.initializeNumberOfOperations();
             repository.save(model);
             return new ResponseEntity<>("Usuario registrado con exito ", HttpStatus.OK);
         }else {

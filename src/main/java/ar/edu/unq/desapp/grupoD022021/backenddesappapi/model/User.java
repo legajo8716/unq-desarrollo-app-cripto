@@ -116,6 +116,12 @@ public class User {
     public void setReputation(float reputation) {
         this.reputation = reputation;
     }
+    public void initializeNumberOfOperations(){
+        this.numberOfOperations = 0;
+    }
+    public void initializeAwardedPoints(){
+        this.awardedPoints = 0;
+    }
     public void sumTransactionConfirmed() {
         this.numberOfOperations++;
 
