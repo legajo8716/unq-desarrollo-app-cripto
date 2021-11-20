@@ -25,9 +25,18 @@ import java.util.List;
 @Aspect
 @Component
 public class ActivityAspect {
-    @AfterReturning(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService.getAllTransaction())",returning = "persons")
-public void getServicesExecutionTime(List<TransactionDTO> persons) {
-        System.out.println("acaaaaaaaaaaaaaaaaaaaaaaaaa");
-        log.info("");
+    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService.getAllTransaction())")
+public void getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+        long endTime = System.currentTimeMillis() - startTime;
+
+        log.info("Nombre del metodo:" +proceedingJoinPoint.getSignature().getName());
+
+        log.info("Tiempo de ejecucion: "+endTime+" ms");
+
+
+
+
 }
 }

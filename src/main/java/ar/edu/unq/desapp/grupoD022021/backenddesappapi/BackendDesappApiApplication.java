@@ -30,7 +30,7 @@ public class BackendDesappApiApplication  {
 	}
 
 	public static void main(String[] args) {
-		log.info("acaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
 
 
 
