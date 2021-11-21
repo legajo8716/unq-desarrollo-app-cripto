@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy
-@Slf4j
 
 @EnableCaching
 public class BackendDesappApiApplication  {
