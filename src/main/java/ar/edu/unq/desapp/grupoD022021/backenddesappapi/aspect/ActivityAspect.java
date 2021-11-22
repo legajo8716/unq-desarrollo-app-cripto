@@ -32,17 +32,29 @@ public class ActivityAspect {
     @Autowired
         UserRepository userRepository;
 
-    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService.pepito(..))")
-public void getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.*.*(..))")
+public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
-        proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+       Object result= proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
         long endTime = System.currentTimeMillis() - startTime;
 
-        log.info("Nombre del metodo:" +proceedingJoinPoint.getSignature().getName());
+        if (proceedingJoinPoint.getArgs().length<0){
+            log.info("El metodo no tiene parametros");
+        }
+        else{
+            int nroParametro=0;
+            for  (Object param : proceedingJoinPoint.getArgs()){
+                ;
+                log.info("Parametro "+ nroParametro+": "+param.toString());
+            }
+        }
+
+        log.info("Nombre del metodo: " +proceedingJoinPoint.getSignature().getName());
 
         log.info("Tiempo de ejecucion: "+endTime+" ms");
+        log.info("                                                                ");
 
-
+    return result;
 
 
 
