@@ -17,6 +17,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -32,7 +34,7 @@ public class ActivityAspect {
     @Autowired
         UserRepository userRepository;
 
-    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.*.*(..))")
+    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService.*(..))")
 public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
        Object result= proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
@@ -49,6 +51,12 @@ public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) 
             }
         }
 
+        if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
+            String username = userDetails.getUsername();
+            log.info("username: " + username);
+        }
         log.info("Nombre del metodo: " +proceedingJoinPoint.getSignature().getName());
 
         log.info("Tiempo de ejecucion: "+endTime+" ms");
