@@ -10,6 +10,8 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.ActivityRepo
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,23 +49,29 @@ public class ActivityService {
         return activityListDto;
     }
 
-    public void addActivity(ActivityDto activityDto) {
+    public ResponseEntity<String> addActivity(ActivityDto activityDto) {
         String date = "";
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         date = dtf.format(now);
 
-        Activity newActivity= new Activity();
-        User usuario=userRepository.findByEmail(activityDto.getEmailUser());
-        newActivity.setUsuario(usuario);
-        newActivity.setCryptoactive(activityDto.getCryptoactive());
-        newActivity.setHour(date);
-        newActivity.setCantidad(activityDto.getCantidad());
-        newActivity.setAction(activityDto.getAction());
-        newActivity.setNumberOfOperations(usuario.getNumberOfOperations());
-        newActivity.setAwardedPoints(usuario.getAwardedPoints());
-        activityRepository.save(newActivity);
+        if(activityDto.getCryptoactive().equals("BTCUSDT") && activityDto.getCantidad() > 2){
+            return new ResponseEntity<>("It is only allowed to buy / sell a maximum of two BTCUSDT", HttpStatus.BAD_REQUEST);
+        } else {
+            Activity newActivity= new Activity();
+            User usuario=userRepository.findByEmail(activityDto.getEmailUser());
+            newActivity.setUsuario(usuario);
+            newActivity.setCryptoactive(activityDto.getCryptoactive());
+            newActivity.setHour(date);
+            newActivity.setCantidad(activityDto.getCantidad());
+            newActivity.setAction(activityDto.getAction());
+            newActivity.setNumberOfOperations(usuario.getNumberOfOperations());
+            newActivity.setAwardedPoints(usuario.getAwardedPoints());
+            activityRepository.save(newActivity);
+
+            return new ResponseEntity<>("Sale / purchase added successfully", HttpStatus.OK);
+        }
     }
 
     public ActivityDto getActivity(int idActivity) {
