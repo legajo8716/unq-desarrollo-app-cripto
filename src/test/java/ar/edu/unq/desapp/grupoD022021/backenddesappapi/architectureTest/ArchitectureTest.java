@@ -15,6 +15,9 @@ import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 @AnalyzeClasses(packages = "ar.edu.unq.desapp.grupoD022021.backenddesappapi", importOptions = ImportOption.DoNotIncludeTests.class)
 public class ArchitectureTest {
@@ -36,14 +39,17 @@ public class ArchitectureTest {
 
     @ArchTest
     public static final ArchRule controllerNameRule =
-            classes().that().haveSimpleNameEndingWith("Controller").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice");
+            classes().that().haveSimpleNameEndingWith("Controller").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice")
+                    .andShould().beAnnotatedWith(RestController.class);
 
     @ArchTest
     public static final ArchRule serviceNameRule =
-            classes().that().haveSimpleNameEndingWith("Service").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.service");
+            classes().that().haveSimpleNameEndingWith("Service").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.service")
+                    .andShould().beAnnotatedWith(Service.class);
 
     @ArchTest
     public static final ArchRule repositoriesNameRule =
-            classes().that().haveSimpleNameEndingWith("Repository").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories");
+            classes().that().haveSimpleNameEndingWith("Repository").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories")
+                    .andShould().beAnnotatedWith(Repository.class);
 
 }
