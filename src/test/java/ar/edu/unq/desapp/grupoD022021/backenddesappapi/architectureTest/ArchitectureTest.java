@@ -49,7 +49,8 @@ public class ArchitectureTest {
 
     @ArchTest
     public static final ArchRule repositoriesNameRule =
-            classes().that().haveSimpleNameEndingWith("Repository").should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories")
+            classes().that().haveSimpleNameEndingWith("Repository")
+                    .should().resideInAPackage("ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories")
                     .andShould().beAnnotatedWith(Repository.class);
 
 }

@@ -5,6 +5,7 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.ActivityService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class ActivityController  {
 
     @PostMapping("/addactivity")
     @CrossOrigin
-    public void addActivity(@RequestBody ActivityDto activityDto) {
-        activityService.addActivity(activityDto); }
+    public ResponseEntity<String> addActivity(@RequestBody ActivityDto activityDto) {
+        return activityService.addActivity(activityDto);
+    }
     @PostMapping("/activitytotransaction")
     @CrossOrigin
     public void convertActivityToTransaction(@RequestParam int idActivity, String emailUser){
