@@ -8,6 +8,8 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtResponse;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.JwtUserDetailsService;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import io.netty.util.internal.logging.Log4J2LoggerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +36,7 @@ public class ActivityAspect {
     @Autowired
         UserRepository userRepository;
 
-    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService.*(..))")
+    @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.*.*(..))")
 public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
        Object result= proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
@@ -51,7 +53,7 @@ public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) 
             }
         }
 
-        if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+        if(proceedingJoinPoint.getTarget().getClass()!= UserService.class && proceedingJoinPoint.getTarget().getClass()!= JwtUserDetailsService.class) {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
             String username = userDetails.getUsername();
@@ -67,4 +69,11 @@ public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) 
 
 
 }
+
+
+
+
+
+
+
 }
