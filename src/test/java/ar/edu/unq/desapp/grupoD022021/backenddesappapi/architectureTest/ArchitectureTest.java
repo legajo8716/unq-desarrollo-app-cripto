@@ -28,10 +28,11 @@ public class ArchitectureTest {
                 .layer("Repositories").definedBy("ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories")
                     .layer("Utility").definedBy("ar.edu.unq.desapp.grupoD022021.backenddesappapi.utility")
                     .layer("Security").definedBy("ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt")
+                    .layer("Aspect").definedBy("ar.edu.unq.desapp.grupoD022021.backenddesappapi.aspect")
                     // Add constraints
                     .whereLayer("WebService").mayNotBeAccessedByAnyLayer()
                     .whereLayer("Service").mayOnlyBeAccessedByLayers("WebService", "Utility", "Security")
-                .whereLayer("Repositories").mayOnlyBeAccessedByLayers("Service");
+                .whereLayer("Repositories").mayOnlyBeAccessedByLayers("Service", "Aspect");
 
     @ArchTest
     public static final ArchRule controllerNameRule =
