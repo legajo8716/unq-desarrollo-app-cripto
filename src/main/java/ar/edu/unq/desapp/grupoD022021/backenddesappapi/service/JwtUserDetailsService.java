@@ -17,6 +17,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UserService userService;
 
 
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         if (userService.existsUser(email)) {

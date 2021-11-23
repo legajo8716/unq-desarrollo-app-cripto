@@ -37,43 +37,29 @@ public class ActivityAspect {
         UserRepository userRepository;
 
     @Around(value = "execution(* ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.*.*(..))")
-public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object getServicesExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
        Object result= proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
         long endTime = System.currentTimeMillis() - startTime;
 
-        if (proceedingJoinPoint.getArgs().length<0){
-            log.info("El metodo no tiene parametros");
-        }
+        if (proceedingJoinPoint.getArgs().length<0) log.info("El metodo no tiene parametros");
         else{
             int nroParametro=0;
             for  (Object param : proceedingJoinPoint.getArgs()){
-                ;
-                log.info("Parametro "+ nroParametro+": "+param.toString());
+                log.info("Parametro "+ nroParametro++ +": "+param.toString());
             }
         }
 
         if(proceedingJoinPoint.getTarget().getClass()!= UserService.class && proceedingJoinPoint.getTarget().getClass()!= JwtUserDetailsService.class) {
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-                    .getPrincipal();
-            String username = userDetails.getUsername();
-            log.info("username: " + username);
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            log.info("username: " + userDetails.getUsername());
         }
         log.info("Nombre del metodo: " +proceedingJoinPoint.getSignature().getName());
-
         log.info("Tiempo de ejecucion: "+endTime+" ms");
         log.info("                                                                ");
 
     return result;
 
-
-
-}
-
-
-
-
-
-
+    }
 
 }
