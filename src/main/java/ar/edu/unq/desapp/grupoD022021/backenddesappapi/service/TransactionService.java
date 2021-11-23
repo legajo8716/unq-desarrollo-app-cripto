@@ -53,6 +53,7 @@ public class TransactionService {
         Transaction transactionUpdate=transactionRepository.findById(idTransaction);
         User usuarioCompradorUpdate=transactionUpdate.getUsuarioComprador();
         User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
+
         usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
         usuarioCompradorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
         transactionUpdate.confirm();
@@ -62,11 +63,12 @@ public class TransactionService {
     }
 
     public void transactionCancell(int idTransaction){
-        Transaction transaction=transactionRepository.findById(idTransaction);
-        transaction.getUsuarioVendedor().setAwardedPoints(30);
-        transaction.getUsuarioVendedor().setAwardedPointsOfOperationCancelled(pointHandler.getPointCancelTransaction());
-        transaction.cancel();
-        transactionRepository.save(transaction);
+        Transaction transactionUpdate=transactionRepository.findById(idTransaction);
+        User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
+        usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointCancelTransaction());
+        userService.save(usuarioVendedorUpdate);
+        transactionUpdate.cancel();
+        transactionRepository.save(transactionUpdate);
     }
 
    public List<TransactionDTO> getTransactionThatUser(String email) {

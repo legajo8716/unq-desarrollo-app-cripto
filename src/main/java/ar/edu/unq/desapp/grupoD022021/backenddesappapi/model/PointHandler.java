@@ -10,7 +10,7 @@ public class PointHandler {
     private int cantTimeOnSecondExpired =30*60;
     private int cantPointNotExpired=10;
     private int cantPointExpired=5;
-    private int cantPointCancel=20;
+    private int cantPointCancel=-20;
 
    // public PointHandler(int cantTimeOnSecond, int cantPointNotExpired, int cantPointExpired, int cantPointCancel) {
      //   this.cantTimeOnSecondExpired = cantTimeOnSecond;
