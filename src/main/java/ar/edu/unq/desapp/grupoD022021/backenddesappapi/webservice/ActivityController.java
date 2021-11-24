@@ -32,17 +32,6 @@ public class ActivityController  {
     @PostMapping("/activitytotransaction")
     @CrossOrigin
     public void convertActivityToTransaction(@RequestParam int idActivity, String emailUser){
-        //TODO: Esto va en el service
-        ActivityDto actividadAux=activityService.getActivity(idActivity);
-        TransactionDTO transactionDTO=new TransactionDTO();
-        transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
-        transactionDTO.setEmailUserVendedor(actividadAux.getEmailUser());
-        transactionDTO.setEmailUserComprador(emailUser);
-        transactionDTO.setCantidad(actividadAux.getCantidad());
-        transactionDTO.setAction(actividadAux.getAction());
-        transactionDTO.setReputation(actividadAux.getReputation());
-        transactionService.addTransaccion(transactionDTO);
-        activityService.finishActivity(idActivity);
-
+        activityService.convertActivityToTransaction(idActivity, emailUser);
     }
 }

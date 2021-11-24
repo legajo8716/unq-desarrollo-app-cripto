@@ -3,8 +3,6 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Transaction;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.ActivityRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
@@ -12,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Service
 
@@ -27,6 +23,9 @@ public class ActivityService {
     @Autowired
 
     UserRepository userRepository;
+
+    @Autowired
+    TransactionService transactionService ;
 
     public List<ActivityDto> getAllActivity() {
         List<Activity> activityList = activityRepository.findAll();
@@ -92,5 +91,20 @@ public class ActivityService {
 
     public void finishActivity(int idActivity) {
         activityRepository.deleteById(idActivity);
+    }
+
+    public void convertActivityToTransaction(int idActivity, String emailUser) {
+
+        ActivityDto actividadAux= getActivity(idActivity);
+        TransactionDTO transactionDTO=new TransactionDTO();
+        transactionDTO.setCryptoactive(actividadAux.getCryptoactive());
+        transactionDTO.setEmailUserVendedor(actividadAux.getEmailUser());
+        transactionDTO.setEmailUserComprador(emailUser);
+        transactionDTO.setCantidad(actividadAux.getCantidad());
+        transactionDTO.setAction(actividadAux.getAction());
+        transactionDTO.setReputation(actividadAux.getReputation());
+        transactionService.addTransaccion(transactionDTO);
+        finishActivity(idActivity);
+
     }
 }
