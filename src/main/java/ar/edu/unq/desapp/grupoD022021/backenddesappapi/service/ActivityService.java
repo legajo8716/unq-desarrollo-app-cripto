@@ -7,7 +7,6 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Transaction;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.ActivityRepository;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +30,7 @@ public class ActivityService {
 
     public List<ActivityDto> getAllActivity() {
         List<Activity> activityList = activityRepository.findAll();
-        List<ActivityDto> activityListDto = new ArrayList<ActivityDto>();
+        List<ActivityDto> activityListDto = new ArrayList<>();
 
         for (Activity activity : activityList) {
             User userAux = userRepository.findByEmail(activity.getUsuario().getEmail());
@@ -44,6 +43,7 @@ public class ActivityService {
             activityDTOAux.setFullNameUser(userAux.getName() + " " + userAux.getLastname());
             activityDTOAux.setReputation(userAux.getAwardedPoints());
             activityDTOAux.setNumberOperations(userAux.getNumberOfOperations());
+            activityDTOAux.setEmailUser(userAux.getEmail());
             activityListDto.add(activityDTOAux);
         }
         return activityListDto;

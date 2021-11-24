@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 @Service
 public class UserService {
@@ -61,7 +60,6 @@ public class UserService {
         return  emailNoIsEmpty && validEmail && !existEmail;
     }
 
-    private void addGenericMessageError(){}
 
     private Boolean validCvu(String cvu, int fieldLength){
         Boolean isValidCvu = this.isValidField(cvu, fieldLength);
