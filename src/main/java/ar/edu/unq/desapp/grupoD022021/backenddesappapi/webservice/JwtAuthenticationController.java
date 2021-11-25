@@ -36,15 +36,15 @@ public class JwtAuthenticationController {
     @PostMapping(value = "/authenticate")
     @CrossOrigin
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        return ResponseEntity.ok(new JwtResponse(token(user(authenticationRequest.getUsername()))));
+    }
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+    private UserDetails user(String userName){
+        return userDetailsService.loadUserByUsername(userName);
+    }
+    private String token(UserDetails userDetails){
+        return jwtTokenUtil.generateToken(userDetails);
     }
 
     private void authenticate(String username, String password) throws Exception {
