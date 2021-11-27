@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/** CLASE PARA PARSEAR EL JSON QUE ME VIENE DE LA API DEL BCRA**/
 public class DollarPrice {
 
 

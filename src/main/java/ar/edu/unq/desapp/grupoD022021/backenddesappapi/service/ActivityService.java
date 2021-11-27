@@ -55,8 +55,10 @@ public class ActivityService {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         date = dtf.format(now);
-
-        if(activityDto.getCryptoactive().equals("BTCUSDT") && activityDto.getCantidad() > 2){
+        if(!validAmount(activityDto.getCantidad())){
+            return new ResponseEntity<>("Invalid amount", HttpStatus.BAD_REQUEST);
+        }
+        if(isBTCUSDT(activityDto.getCryptoactive()) && activityDto.getCantidad() > 2){
             return new ResponseEntity<>("It is only allowed to buy / sell a maximum of two BTCUSDT", HttpStatus.BAD_REQUEST);
         } else {
             Activity newActivity= new Activity();
@@ -74,6 +76,13 @@ public class ActivityService {
         }
     }
 
+    private Boolean validAmount(int amount){
+        return amount > 0;
+    }
+
+    private Boolean isBTCUSDT(String crypto){
+        return crypto.equals("BTCUSDT");
+    }
     public ActivityDto getActivity(int idActivity) {
         Activity activityWanted=activityRepository.findById(idActivity);
         ActivityDto activityDto= new ActivityDto();
