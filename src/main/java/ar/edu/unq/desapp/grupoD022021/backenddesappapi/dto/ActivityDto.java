@@ -7,7 +7,7 @@ public class ActivityDto  {
         int id;
         String hour;
         String cryptoactive;
-        int cantidad;
+        Double cantidad;
         String fullNameUser;
         int numberOperations;
         int reputation;
@@ -44,11 +44,11 @@ public class ActivityDto  {
         this.cryptoactive = cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 

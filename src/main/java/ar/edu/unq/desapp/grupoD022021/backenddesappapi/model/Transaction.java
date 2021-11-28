@@ -14,7 +14,7 @@ public class Transaction {
         int id;
         String hour;
         String cryptoactive;
-        int cantidad;
+        Double cantidad;
         @ManyToOne
         User usuarioVendedor;
         @ManyToOne
@@ -43,7 +43,7 @@ public class Transaction {
         return cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
@@ -64,7 +64,7 @@ public class Transaction {
         this.cryptoactive = cryptoactive;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -79,6 +79,8 @@ public class Transaction {
     public void confirm() {
         this.isFinalished=true;
         sumTransactionConfirmed();
+        this.setReputation( this.usuarioVendedor.getReputation());
+
 
     }
 

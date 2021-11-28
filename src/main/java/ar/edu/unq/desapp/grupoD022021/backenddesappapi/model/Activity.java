@@ -2,17 +2,16 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "activity")
 public class Activity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id_activity;
     String hour;
     String cryptoactive;
-    int cantidad;
+    Double cantidad;
     @ManyToOne
     User usuario;
     String action;
@@ -22,12 +21,12 @@ public class Activity {
     public Activity() {
     }
 
-    public int getId() {
-        return id;
+    public int getId_activity() {
+        return id_activity;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_activity(int id_activity) {
+        this.id_activity = id_activity;
     }
 
     public String getHour() {
@@ -46,11 +45,11 @@ public class Activity {
         this.cryptoactive = cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 

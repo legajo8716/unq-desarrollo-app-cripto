@@ -12,7 +12,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     Transaction findById(int id);
     boolean deleteById(int id);
     List<Transaction> findByUsuarioCompradorEmail (String email);
-
+    Transaction save(Transaction transaction);
     List<Transaction> findByUsuarioVendedorId (Integer idUser);
 
     List<Transaction>  findByUsuarioVendedorEmail(String email);

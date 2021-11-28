@@ -35,7 +35,7 @@ public class ActivityService {
         for (Activity activity : activityList) {
             User userAux = userRepository.findByEmail(activity.getUsuario().getEmail());
             ActivityDto activityDTOAux = new ActivityDto();
-            activityDTOAux.setId(activity.getId());
+            activityDTOAux.setId(activity.getId_activity());
             activityDTOAux.setCryptoactive(activity.getCryptoactive());
             activityDTOAux.setAction(activity.getAction());
             activityDTOAux.setHour(activity.getHour());
@@ -66,7 +66,7 @@ public class ActivityService {
             newActivity.setUsuario(usuario);
             newActivity.setCryptoactive(activityDto.getCryptoactive());
             newActivity.setHour(date);
-            newActivity.setCantidad(activityDto.getCantidad());
+            newActivity.setCantidad((activityDto.getCantidad()));
             newActivity.setAction(activityDto.getAction());
             newActivity.setNumberOfOperations(usuario.getNumberOfOperations());
             newActivity.setAwardedPoints(usuario.getAwardedPoints());
@@ -76,8 +76,8 @@ public class ActivityService {
         }
     }
 
-    private Boolean validAmount(int amount){
-        return amount > 0;
+    private Boolean validAmount(Double amount){
+        return amount > 0.0;
     }
 
     private Boolean isBTCUSDT(String crypto){
@@ -86,7 +86,7 @@ public class ActivityService {
     public ActivityDto getActivity(int idActivity) {
         Activity activityWanted=activityRepository.findById(idActivity);
         ActivityDto activityDto= new ActivityDto();
-        activityDto.setId(activityWanted.getId());
+        activityDto.setId(activityWanted.getId_activity());
         activityDto.setEmailUser(activityWanted.getUsuario().getEmail());
         activityDto.setCantidad(activityWanted.getCantidad());
         activityDto.setFullNameUser(activityWanted.getUsuario().getName()+" "+activityWanted.getUsuario().getLastname());

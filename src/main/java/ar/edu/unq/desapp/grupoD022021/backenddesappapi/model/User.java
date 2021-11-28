@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name", length = 30, nullable = false)
     private String name;
@@ -31,7 +31,7 @@ public class User {
     private Double pointNegative;
 
     @Column(name = "reputation")
-    private float reputation;
+    private int reputation;
     public User( String name, String lastname, String email, String direction, String password, String cvu, String wallet) {
 
         this.name = name;
@@ -109,11 +109,11 @@ public class User {
             this.awardedPoints = 0;
         }
     }
-    public float getReputation() {
+    public int getReputation() {
         return reputation;
     }
 
-    public void setReputation(float reputation) {
+    public void setReputation(int reputation) {
         this.reputation = reputation;
     }
     public void initializeNumberOfOperations(){

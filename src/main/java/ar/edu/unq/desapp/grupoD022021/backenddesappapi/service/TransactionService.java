@@ -33,7 +33,7 @@ public class TransactionService {
         return this.convertDtoList(transactionList);
     }
     public void addTransaccion(TransactionDTO transaction){
-         Transaction newTransaction= new Transaction();
+        Transaction newTransaction= new Transaction();
         String date = "";
         User sellerUser = userService.findByEmail(transaction.getEmailUserVendedor());
 
@@ -54,12 +54,11 @@ public class TransactionService {
         Transaction transactionUpdate=transactionRepository.findById(idTransaction);
         User usuarioCompradorUpdate=transactionUpdate.getUsuarioComprador();
         User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
-
         usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
         usuarioCompradorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
+        transactionUpdate.setUsuarioComprador(usuarioCompradorUpdate);
+        transactionUpdate.setUsuarioVendedor(usuarioVendedorUpdate);
         transactionUpdate.confirm();
-        userService.save(usuarioCompradorUpdate);
-        userService.save(usuarioVendedorUpdate);
         transactionRepository.save(transactionUpdate);
     }
 

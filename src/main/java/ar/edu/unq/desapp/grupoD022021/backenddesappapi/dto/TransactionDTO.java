@@ -6,7 +6,7 @@ public class TransactionDTO {
     int id;
     String hour;
     String cryptoactive;
-    int cantidad;
+    Double cantidad;
     String usuarioVendedor;
     String emailUserVendedor;
     String usuarioComprador;
@@ -17,7 +17,7 @@ public class TransactionDTO {
     Boolean isFinalished=false;
 
 
-    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action, int reputation) {
+    public TransactionDTO(int id, String hour, String cryptoactive, Double cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action, int reputation) {
         this.id = id;
         this.hour = hour;
         this.cryptoactive = cryptoactive;
@@ -61,11 +61,11 @@ public class TransactionDTO {
         this.cryptoactive = cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 
