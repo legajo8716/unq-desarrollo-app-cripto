@@ -12,10 +12,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -45,21 +42,27 @@ public class TransactionService {
          newTransaction.setUsuarioVendedor(sellerUser);
         newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));
         newTransaction.setShippingAddress(transaction.getAction());
-        newTransaction.setReputation(sellerUser.getAwardedPoints());
+
+        newTransaction.setReputation(transaction.getReputation());
 
         newTransaction.setCryptoactive(transaction.getCryptoactive());
          transactionRepository.save(newTransaction);
     }
     public void transactionConfirmation(int idTransaction){
         Transaction transactionUpdate=transactionRepository.findById(idTransaction);
+        transactionUpdate.confirm();
+
         User usuarioCompradorUpdate=transactionUpdate.getUsuarioComprador();
         User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
         usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
         usuarioCompradorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
-        transactionUpdate.setUsuarioComprador(usuarioCompradorUpdate);
+        usuarioCompradorUpdate.setReputation(pointHandler.getReputacion(usuarioCompradorUpdate));
+        usuarioVendedorUpdate.setReputation(pointHandler.getReputacion(usuarioVendedorUpdate));
         transactionUpdate.setUsuarioVendedor(usuarioVendedorUpdate);
-        transactionUpdate.confirm();
+        transactionUpdate.setUsuarioComprador(usuarioCompradorUpdate);
         transactionRepository.save(transactionUpdate);
+
+
     }
 
     public void transactionCancell(int idTransaction){

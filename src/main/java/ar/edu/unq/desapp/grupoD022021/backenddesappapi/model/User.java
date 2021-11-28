@@ -31,7 +31,7 @@ public class User {
     private Double pointNegative;
 
     @Column(name = "reputation")
-    private int reputation;
+    private Double reputation;
     public User( String name, String lastname, String email, String direction, String password, String cvu, String wallet) {
 
         this.name = name;
@@ -44,6 +44,7 @@ public class User {
         this.numberOfOperations=0;
         this.pointNegative=0.0;
         this.awardedPoints=0;
+        this.reputation=0.0;
     }
 
     public User() {
@@ -109,11 +110,11 @@ public class User {
             this.awardedPoints = 0;
         }
     }
-    public int getReputation() {
+    public Double getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(Double reputation) {
         this.reputation = reputation;
     }
     public void initializeNumberOfOperations(){

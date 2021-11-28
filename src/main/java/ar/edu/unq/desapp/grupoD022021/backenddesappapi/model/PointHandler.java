@@ -38,11 +38,11 @@ public class PointHandler {
     public int getPointCancelTransaction(){
         return cantPointCancel;
     }
-    public int getReputacion(User user) {
-        if (user.getNumberOfOperations() >0)
-            return user.getAwardedPoints() / user.getNumberOfOperations();
+    public Double getReputacion(User user) {
+        if (user.getNumberOfOperations() >0.0 && user.getAwardedPoints()>0)
+            return  user.getAwardedPoints() / (double) user.getNumberOfOperations();
         else
-            return 0;
+            return 0.0;
     }
 
 

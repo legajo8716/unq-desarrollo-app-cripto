@@ -2,9 +2,6 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
 
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Entity
 @Table(name = "transaction")
@@ -21,7 +18,7 @@ public class Transaction {
         User usuarioComprador;
         Boolean isFinalished=false;
         String shippingAddress;
-        int reputation;
+        double reputation;
 
     public Boolean getFinalished() {
         return isFinalished;
@@ -79,7 +76,6 @@ public class Transaction {
     public void confirm() {
         this.isFinalished=true;
         sumTransactionConfirmed();
-        this.setReputation( this.usuarioVendedor.getReputation());
 
 
     }
@@ -115,11 +111,11 @@ public class Transaction {
         }
     }
 
-    public int getReputation() {
-        return reputation;
+    public double getReputation() {
+        return this.usuarioVendedor.getReputation();
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(double reputation) {
         this.reputation = reputation;
     }
 }

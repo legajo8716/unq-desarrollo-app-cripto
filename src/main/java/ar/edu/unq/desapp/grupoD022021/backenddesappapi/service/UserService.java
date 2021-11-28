@@ -33,6 +33,7 @@ public class UserService {
             model.setPassword(passwordEncoder.encode(model.getPassword()));
             model.initializeAwardedPoints();
             model.initializeNumberOfOperations();
+            model.setReputation(0.0);
             repository.save(model);
             return new ResponseEntity<>("Usuario registrado con exito ", HttpStatus.OK);
         }else {

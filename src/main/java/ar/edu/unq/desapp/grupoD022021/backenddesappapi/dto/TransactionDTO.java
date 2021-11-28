@@ -1,7 +1,5 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto;
 
-import java.util.Date;
-
 public class TransactionDTO {
     int id;
     String hour;
@@ -13,7 +11,7 @@ public class TransactionDTO {
     String emailUserComprador;
     String action;
     String shippingAddress;
-    int reputation;
+    double reputation;
     Boolean isFinalished=false;
 
 
@@ -125,11 +123,11 @@ public class TransactionDTO {
         this.action = action;
     }
 
-    public int getReputation() {
+    public double getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(double reputation) {
         this.reputation = reputation;
     }
 }
