@@ -50,7 +50,8 @@ public class ActivityAspect {
             }
         }
 
-        if(proceedingJoinPoint.getTarget().getClass()!= UserService.class && proceedingJoinPoint.getTarget().getClass()!= JwtUserDetailsService.class) {
+        if(SecurityContextHolder.getContext().getAuthentication() !=null &&proceedingJoinPoint.getTarget().getClass()!= UserService.class && proceedingJoinPoint.getTarget().getClass()!= JwtUserDetailsService.class) {
+
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             log.info("username: " + userDetails.getUsername());
         }
