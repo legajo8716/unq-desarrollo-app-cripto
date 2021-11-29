@@ -31,13 +31,8 @@ public class TransactionService {
     }
     public void addTransaccion(TransactionDTO transaction){
         Transaction newTransaction= new Transaction();
-        String date = "";
         User sellerUser = userService.findByEmail(transaction.getEmailUserVendedor());
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        date = dtf.format(now);
-         newTransaction.setHour(date);
+        newTransaction.setHour(LocalDateTime.now());
          newTransaction.setCantidad(transaction.getCantidad());
          newTransaction.setUsuarioVendedor(sellerUser);
         newTransaction.setUsuarioComprador(userService.findByEmail(transaction.getEmailUserComprador()));
@@ -51,7 +46,6 @@ public class TransactionService {
     public void transactionConfirmation(int idTransaction){
         Transaction transactionUpdate=transactionRepository.findById(idTransaction);
         transactionUpdate.confirm();
-
         User usuarioCompradorUpdate=transactionUpdate.getUsuarioComprador();
         User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
         usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointConfirmTransaction(transactionUpdate));
@@ -69,7 +63,8 @@ public class TransactionService {
         Transaction transactionUpdate=transactionRepository.findById(idTransaction);
         User usuarioVendedorUpdate=transactionUpdate.getUsuarioVendedor();
         usuarioVendedorUpdate.sumAwardedPoints(pointHandler.getPointCancelTransaction());
-        userService.save(usuarioVendedorUpdate);
+        usuarioVendedorUpdate.setReputation(pointHandler.getReputacion(usuarioVendedorUpdate));
+        transactionUpdate.setUsuarioVendedor(usuarioVendedorUpdate);
         transactionUpdate.cancel();
         transactionRepository.save(transactionUpdate);
     }
@@ -84,7 +79,11 @@ public class TransactionService {
             transactionDTOAux.setCantidad(transaction.getCantidad());
             transactionDTOAux.setId(transaction.getId());
             transactionDTOAux.setCryptoactive(transaction.getCryptoactive());
-            transactionDTOAux.setHour(transaction.getHour());
+            String date = "";
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            date = dtf.format(transaction.getHour());
+            transactionDTOAux.setHour(date);
             transactionDTOAux.setFinalished(transaction.getFinalished());
             transactionDTOAux.setEmailUserVendedor(transaction.getUsuarioVendedor().getEmail());
             transactionDTOAux.setUsuarioVendedor(transaction.getUsuarioVendedor().getName() + " "+ transaction.getUsuarioVendedor().getLastname());

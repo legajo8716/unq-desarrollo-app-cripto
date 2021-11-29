@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Component
 public class PointHandler {
 // Todo:Ver donde se puede setear estos valores para no tener que dejarlos harcodeados
-    private int cantTimeOnSecondExpired =30*60;
+    private int cantTimeOnSecondExpired =60;
     private int cantPointNotExpired=10;
     private int cantPointExpired=5;
     private int cantPointCancel=-20;
@@ -21,18 +21,18 @@ public class PointHandler {
 
     public int getPointConfirmTransaction(Transaction transaction){
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime created=LocalDateTime.now();
-        if(this.beatsTimeExpired(now,created))
-            return this.cantPointExpired;
-        else
+        LocalDateTime created=transaction.getHour();
+        if(this.beatsTimeExpired(now,created)){
+            return this.cantPointExpired;}
+        else {
             return this.cantPointNotExpired;
-
+        }
     }
     private boolean beatsTimeExpired(LocalDateTime now, LocalDateTime created) {
         return now.getYear()==created.getYear()&&
                 now.getMonth()==created.getMonth()&&
                 now.getDayOfWeek()==created.getDayOfWeek()&&
-                now.getHour()*now.getMinute()*now.getSecond()-created.getHour()*created.getMinute()*created.getSecond()<=this.cantTimeOnSecondExpired;
+                now.getHour()*now.getMinute()*now.getSecond()-created.getHour()*created.getMinute()*created.getSecond()>this.cantTimeOnSecondExpired;
     }
 
     public int getPointCancelTransaction(){

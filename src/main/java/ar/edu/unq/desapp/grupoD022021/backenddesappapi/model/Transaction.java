@@ -2,6 +2,7 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transaction")
@@ -9,7 +10,7 @@ public class Transaction {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         int id;
-        String hour;
+        LocalDateTime hour;
         String cryptoactive;
         Double cantidad;
         @ManyToOne
@@ -32,7 +33,7 @@ public class Transaction {
 
         }
 
-    public String getHour() {
+    public LocalDateTime getHour() {
         return hour;
     }
 
@@ -53,7 +54,7 @@ public class Transaction {
     }
 
 
-    public void setHour(String hour) {
+    public void setHour(LocalDateTime hour) {
         this.hour = hour;
     }
 
