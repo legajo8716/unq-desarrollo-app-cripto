@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ResponseDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtResponse;
@@ -8,13 +7,13 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtTokenUtil
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.JwtUserDetailsService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -61,7 +60,6 @@ public class JwtAuthenticationController {
     @CrossOrigin
 
     public ResponseEntity<String> register(@RequestBody User user) {
-        ResponseDTO response = userService.save(user);
-        return new ResponseEntity<>(response.getMessage(), response.getStatus());
+        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 }

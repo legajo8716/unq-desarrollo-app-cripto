@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ResponseDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
@@ -9,7 +8,6 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.ActivityRepo
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -50,17 +48,17 @@ public class ActivityService {
         return activityListDto;
     }
 
-    public ResponseDTO addActivity(ActivityDto activityDto) {
+    public String addActivity(ActivityDto activityDto) {
         String date = "";
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         date = dtf.format(now);
         if(!validAmount(activityDto.getCantidad())){
-            return new ResponseDTO("Invalid amount", HttpStatus.BAD_REQUEST);
+            return "Invalid amount";
         }
         if(isBTCUSDT(activityDto.getCryptoactive()) && activityDto.getCantidad() > 2){
-            return new ResponseDTO("It is only allowed to buy / sell a maximum of two BTCUSDT", HttpStatus.BAD_REQUEST);
+            return "It is only allowed to buy / sell a maximum of two BTCUSDT";
         } else {
             Activity newActivity= new Activity();
             User usuario=userRepository.findByEmail(activityDto.getEmailUser());
@@ -70,10 +68,10 @@ public class ActivityService {
             newActivity.setCantidad((activityDto.getCantidad()));
             newActivity.setAction(activityDto.getAction());
             newActivity.setNumberOfOperations(usuario.getNumberOfOperations());
-            newActivity.setAwardedPoints(usuario.getAwardedPoints());
+            newActivity.setAwardedPoints(usuario.getReputation());
             activityRepository.save(newActivity);
 
-            return new ResponseDTO("Sale / purchase added successfully", HttpStatus.OK);
+            return "Sale / purchase added successfully";
         }
     }
 
