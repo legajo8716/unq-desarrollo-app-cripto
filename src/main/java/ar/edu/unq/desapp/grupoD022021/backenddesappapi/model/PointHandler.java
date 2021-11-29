@@ -1,23 +1,23 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
 public class PointHandler {
-// Todo:Ver donde se puede setear estos valores para no tener que dejarlos harcodeados
-    private int cantTimeOnSecondExpired =60;
-    private int cantPointNotExpired=10;
-    private int cantPointExpired=5;
-    private int cantPointCancel=-20;
 
-   // public PointHandler(int cantTimeOnSecond, int cantPointNotExpired, int cantPointExpired, int cantPointCancel) {
-     //   this.cantTimeOnSecondExpired = cantTimeOnSecond;
-       // this.cantPointNotExpired = cantPointNotExpired;
-        //this.cantPointExpired = cantPointExpired;
-       // this.cantPointCancel = cantPointCancel;
-    //}
+    @Value("${cantTimeOnSecondExpired}")
+    private int cantTimeOnSecondExpired;
+    @Value("${cantPointNotExpired}")
+    private int cantPointNotExpired;
+    @Value("${cantPointExpired}")
+    private int cantPointExpired;
+    @Value("${cantPointCancel}")
+    private int cantPointCancel;
+
+
 
     public int getPointConfirmTransaction(Transaction transaction){
         LocalDateTime now = LocalDateTime.now();

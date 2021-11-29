@@ -7,6 +7,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
 			</plugin>
 
 		</plugins>
@@ -22,6 +23,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend-desapp-api</name>
 	<description>Proyecto Backend del Grupo-D-022021 de la materia Desarrollo de Aplicaciones</description>
+
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -106,12 +109,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.6</version>
-			<scope>runtime</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
