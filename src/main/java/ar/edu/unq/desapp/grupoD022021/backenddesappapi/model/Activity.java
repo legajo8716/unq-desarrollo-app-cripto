@@ -15,7 +15,7 @@ public class Activity {
     @ManyToOne
     User usuario;
     String action;
-    int awardedPoints;
+    Double awardedPoints;
     int numberOfOperations;
 
     public Activity() {
@@ -69,11 +69,11 @@ public class Activity {
         this.action = action;
     }
 
-    public int getAwardedPoints() {
+    public Double getAwardedPoints() {
         return awardedPoints;
     }
 
-    public void setAwardedPoints(int awardedPoints) {
+    public void setAwardedPoints(Double awardedPoints) {
         this.awardedPoints = awardedPoints;
     }
 

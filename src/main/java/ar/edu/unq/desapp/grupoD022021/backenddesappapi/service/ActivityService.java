@@ -42,7 +42,7 @@ public class ActivityService {
             activityDTOAux.setHour(activity.getHour());
             activityDTOAux.setCantidad(activity.getCantidad());
             activityDTOAux.setFullNameUser(userAux.getName() + " " + userAux.getLastname());
-            activityDTOAux.setReputation(userAux.getAwardedPoints());
+            activityDTOAux.setReputation(userAux.getReputation());
             activityDTOAux.setNumberOperations(userAux.getNumberOfOperations());
             activityDTOAux.setEmailUser(userAux.getEmail());
             activityListDto.add(activityDTOAux);
