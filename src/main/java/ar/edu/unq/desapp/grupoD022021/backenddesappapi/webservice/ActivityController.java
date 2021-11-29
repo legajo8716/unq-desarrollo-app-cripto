@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ResponseDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.ActivityService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.TransactionService;
@@ -27,7 +28,8 @@ public class ActivityController  {
     @PostMapping("/addactivity")
     @CrossOrigin
     public ResponseEntity<String> addActivity(@RequestBody ActivityDto activityDto) {
-        return activityService.addActivity(activityDto);
+        ResponseDTO response = activityService.addActivity(activityDto);
+        return new ResponseEntity<>(response.getMessage(), response.getStatus());
     }
     @PostMapping("/activitytotransaction")
     @CrossOrigin

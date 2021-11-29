@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ActivityDto;
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ResponseDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.TransactionDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
@@ -49,17 +50,17 @@ public class ActivityService {
         return activityListDto;
     }
 
-    public ResponseEntity<String> addActivity(ActivityDto activityDto) {
+    public ResponseDTO addActivity(ActivityDto activityDto) {
         String date = "";
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         date = dtf.format(now);
         if(!validAmount(activityDto.getCantidad())){
-            return new ResponseEntity<>("Invalid amount", HttpStatus.BAD_REQUEST);
+            return new ResponseDTO("Invalid amount", HttpStatus.BAD_REQUEST);
         }
         if(isBTCUSDT(activityDto.getCryptoactive()) && activityDto.getCantidad() > 2){
-            return new ResponseEntity<>("It is only allowed to buy / sell a maximum of two BTCUSDT", HttpStatus.BAD_REQUEST);
+            return new ResponseDTO("It is only allowed to buy / sell a maximum of two BTCUSDT", HttpStatus.BAD_REQUEST);
         } else {
             Activity newActivity= new Activity();
             User usuario=userRepository.findByEmail(activityDto.getEmailUser());
@@ -72,7 +73,7 @@ public class ActivityService {
             newActivity.setAwardedPoints(usuario.getAwardedPoints());
             activityRepository.save(newActivity);
 
-            return new ResponseEntity<>("Sale / purchase added successfully", HttpStatus.OK);
+            return new ResponseDTO("Sale / purchase added successfully", HttpStatus.OK);
         }
     }
 

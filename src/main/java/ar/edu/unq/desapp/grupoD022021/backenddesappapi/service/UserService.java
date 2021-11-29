@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ResponseDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.UserDto;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.UserRepository;
@@ -28,16 +29,16 @@ public class UserService {
     private List<String> errors = new ArrayList<>();
 
     @Transactional
-    public ResponseEntity<String> save(User model) {
+    public ResponseDTO save(User model) {
         if(validateUser(model)){
             model.setPassword(passwordEncoder.encode(model.getPassword()));
             model.initializeAwardedPoints();
             model.initializeNumberOfOperations();
             model.setReputation(0.0);
             repository.save(model);
-            return new ResponseEntity<>("Usuario registrado con exito ", HttpStatus.OK);
+            return new ResponseDTO("Usuario registrado con exito ", HttpStatus.OK);
         }else {
-            return new ResponseEntity<>(this.errors.get(0), HttpStatus.BAD_REQUEST);
+            return new ResponseDTO(this.errors.get(0), HttpStatus.BAD_REQUEST);
         }
 
     }

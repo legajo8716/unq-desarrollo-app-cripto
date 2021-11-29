@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.webservice;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto.ResponseDTO;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtRequest;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtResponse;
@@ -60,6 +61,7 @@ public class JwtAuthenticationController {
     @CrossOrigin
 
     public ResponseEntity<String> register(@RequestBody User user) {
-        return userService.save(user);
+        ResponseDTO response = userService.save(user);
+        return new ResponseEntity<>(response.getMessage(), response.getStatus());
     }
 }
