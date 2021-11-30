@@ -32,7 +32,7 @@ public class PointHandler {
         return now.getYear()==created.getYear()&&
                 now.getMonth()==created.getMonth()&&
                 now.getDayOfWeek()==created.getDayOfWeek()&&
-                now.getHour()*now.getMinute()*now.getSecond()-created.getHour()*created.getMinute()*created.getSecond()>this.cantTimeOnSecondExpired;
+                ( ( ((now.getHour()*60*60)+(now.getMinute()*60)+now.getSecond())-((created.getHour()*60*60)+(created.getMinute()*60)+created.getSecond()))>this.cantTimeOnSecondExpired);
     }
 
     public int getPointCancelTransaction(){
