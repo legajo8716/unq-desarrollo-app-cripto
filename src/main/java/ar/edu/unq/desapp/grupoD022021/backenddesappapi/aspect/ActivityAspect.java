@@ -42,7 +42,7 @@ public class ActivityAspect {
        Object result= proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
         long endTime = System.currentTimeMillis() - startTime;
 
-        if (proceedingJoinPoint.getArgs().length<0) log.info("El metodo no tiene parametros");
+        if (proceedingJoinPoint.getArgs().length<0){ log.info("El metodo no tiene parametros");}
         else{
             int nroParametro=0;
             for  (Object param : proceedingJoinPoint.getArgs()){
