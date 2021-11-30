@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
+
 import java.util.Date;
 
 public class ActivityDto  {
@@ -7,10 +9,10 @@ public class ActivityDto  {
         int id;
         String hour;
         String cryptoactive;
-        int cantidad;
+        Double cantidad;
         String fullNameUser;
         int numberOperations;
-        int reputation;
+        Double reputation;
         String action;
         String emailUser;
         int shippingAddress;
@@ -18,6 +20,11 @@ public class ActivityDto  {
         public ActivityDto() {
         }
 
+        public ActivityDto(Activity activity){
+            this.hour = activity.getHour();
+            this.cryptoactive = activity.getCryptoactive();
+            this.cantidad = activity.getCantidad();
+        }
 
 
     public int getId() {
@@ -44,11 +51,11 @@ public class ActivityDto  {
         this.cryptoactive = cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -84,11 +91,11 @@ public class ActivityDto  {
         this.numberOperations = numberOperations;
     }
 
-    public int getReputation() {
+    public Double getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(double reputation) {
         this.reputation = reputation;
     }
 

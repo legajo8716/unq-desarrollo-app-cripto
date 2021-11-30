@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name", length = 30, nullable = false)
     private String name;
@@ -15,13 +15,13 @@ public class User {
     private String lastname;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "direction", nullable = false, length = 8)
-    private Integer direction;
+    @Column(name = "direction", nullable = false, length = 30)
+    private String direction;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "cvu", nullable = false)
+    @Column(name = "cvu", nullable = false, length = 22, unique = true)
     private String cvu;
-    @Column(name = "wallet", nullable = false, length = 8)
+    @Column(name = "wallet", nullable = false, length = 8, unique = true)
     private String wallet;
     @Column(name = "awarded_points")
     private Integer awardedPoints;
@@ -31,8 +31,8 @@ public class User {
     private Double pointNegative;
 
     @Column(name = "reputation")
-    private float reputation;
-    public User( String name, String lastname, String email, Integer direction, String password, String cvu, String wallet) {
+    private Double reputation;
+    public User( String name, String lastname, String email, String direction, String password, String cvu, String wallet) {
 
         this.name = name;
         this.lastname = lastname;
@@ -44,10 +44,14 @@ public class User {
         this.numberOfOperations=0;
         this.pointNegative=0.0;
         this.awardedPoints=0;
+        this.reputation=0.0;
     }
 
     public User() {
-
+        this.numberOfOperations=0;
+        this.pointNegative=0.0;
+        this.awardedPoints=0;
+        this.reputation=0.0;
     }
 
     public Integer getId() {
@@ -66,7 +70,7 @@ public class User {
         return email;
     }
 
-    public Integer getDirection() {
+    public String getDirection() {
         return direction;
     }
 
@@ -109,12 +113,18 @@ public class User {
             this.awardedPoints = 0;
         }
     }
-    public float getReputation() {
+    public Double getReputation() {
         return reputation;
     }
 
-    public void setReputation(float reputation) {
+    public void setReputation(Double reputation) {
         this.reputation = reputation;
+    }
+    public void initializeNumberOfOperations(){
+        this.numberOfOperations = 0;
+    }
+    public void initializeAwardedPoints(){
+        this.awardedPoints = 0;
     }
     public void sumTransactionConfirmed() {
         this.numberOfOperations++;

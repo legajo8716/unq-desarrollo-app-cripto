@@ -2,7 +2,6 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Cryptoactive;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.DollarPrice;
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.repositories.CryptoactiveRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +10,15 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class CryptoactiveService {
-
-    @Autowired
-    CryptoactiveRepository cryptoactiveRepository;
-
 
     @Autowired
     RestTemplate restTemplate;

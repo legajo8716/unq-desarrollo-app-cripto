@@ -7,13 +7,13 @@ import ar.edu.unq.desapp.grupoD022021.backenddesappapi.security.jwt.JwtTokenUtil
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.JwtUserDetailsService;
 import ar.edu.unq.desapp.grupoD022021.backenddesappapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,8 +29,6 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserService userService;
@@ -38,15 +36,15 @@ public class JwtAuthenticationController {
     @PostMapping(value = "/authenticate")
     @CrossOrigin
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        return ResponseEntity.ok(new JwtResponse(token(user(authenticationRequest.getUsername()))));
+    }
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+    private UserDetails user(String userName){
+        return userDetailsService.loadUserByUsername(userName);
+    }
+    private String token(UserDetails userDetails){
+        return jwtTokenUtil.generateToken(userDetails);
     }
 
     private void authenticate(String username, String password) throws Exception {
@@ -61,14 +59,7 @@ public class JwtAuthenticationController {
     @PostMapping("/register")
     @CrossOrigin
 
-    public boolean register(@RequestBody User user) {
-        User newUser = new User(user.getName(),
-                user.getLastname(),
-                user.getEmail(),
-                user.getDirection(),
-                passwordEncoder.encode(user.getPassword()),
-                user.getCVU(), user.getWallet());
-        userService.save(newUser);
-        return true;
+    public ResponseEntity<String> register(@RequestBody User user) {
+        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 }

@@ -2,32 +2,22 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-@Entity
-@Table(name = "cryptoassets")
 public class Cryptoactive implements Serializable {
 
-    @Id
+
     private Integer id;
-    @Column
+
     private String symbol;
-    @Column
     @JsonProperty("price")
     private Double price;
 
 
-    @Column
     private Double priceAr;
-    @Column
     private String quoteTime;
 
     public Cryptoactive(String symbol, String price) {

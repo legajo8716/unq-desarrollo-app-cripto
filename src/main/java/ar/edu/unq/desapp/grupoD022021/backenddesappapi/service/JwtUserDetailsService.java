@@ -9,12 +9,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
+@Transactional
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
+
 
 
     @Override

@@ -12,12 +12,24 @@ public class UserDto  implements Serializable {
     private Integer numberOfOperations;
 
     private Integer awardedPoints;
+    private Double reputation;
+
+
+    public Double getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(Double reputation) {
+        this.reputation = reputation;
+    }
+
 
     public UserDto(User user) {
         this.name = user.getName();
         this.lastName = user.getLastname();
         this.numberOfOperations = user.getNumberOfOperations();
         this.awardedPoints = user.getAwardedPoints();
+        this.reputation=user.getReputation();
     }
 
     //TODO: Sin los getters and setters no funciona D:

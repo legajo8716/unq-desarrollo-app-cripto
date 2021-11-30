@@ -1,15 +1,15 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi;
 
-import ar.edu.unq.desapp.grupoD022021.backenddesappapi.utility.CreateDatosFake;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.client.RestTemplate;
 
-
 @SpringBootApplication
+@EnableAspectJAutoProxy
+
 @EnableCaching
 public class BackendDesappApiApplication  {
 
@@ -22,6 +22,7 @@ public class BackendDesappApiApplication  {
 	}
 
 	public static void main(String[] args) {
+
 
 
 

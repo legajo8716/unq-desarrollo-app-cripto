@@ -1,23 +1,21 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto;
 
-import java.util.Date;
-
 public class TransactionDTO {
     int id;
     String hour;
     String cryptoactive;
-    int cantidad;
+    Double cantidad;
     String usuarioVendedor;
     String emailUserVendedor;
     String usuarioComprador;
     String emailUserComprador;
     String action;
     String shippingAddress;
-    int reputation;
+    double reputation;
     Boolean isFinalished=false;
 
 
-    public TransactionDTO(int id, String hour, String cryptoactive, int cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action, int reputation) {
+    public TransactionDTO(int id, String hour, String cryptoactive, Double cantidad, String usuarioVendedor, String emailUserVendedor, String usuarioComprador, String emailUserComprador, Boolean isFinalished, String shippingAddress, String action, int reputation) {
         this.id = id;
         this.hour = hour;
         this.cryptoactive = cryptoactive;
@@ -61,11 +59,11 @@ public class TransactionDTO {
         this.cryptoactive = cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -125,11 +123,11 @@ public class TransactionDTO {
         this.action = action;
     }
 
-    public int getReputation() {
+    public double getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(double reputation) {
         this.reputation = reputation;
     }
 }

@@ -34,33 +34,17 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
         @MockBean
         UserRepository userRepository;
 
-        /*   @Transactional
-           public User save(User model){
-               return repository.save(model);
-           }
-
-           public List<User> findAll() {
-               return this.repository.findAll();
-           }
-
-           public boolean existsUser(String email) {
-               return this.repository.existsByEmail(email);
-           }
-
-           public User findByEmail(String email) {
-               return this.repository.findByEmail(email);
-           }*/
         @Test
         public void save() {
-            User newUser = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", "12345678", "12345678");
+            User newUser = new User("nelson", "gonzalez", "nel@gmail.com", "12345678", "12345678", "1234567891123456789121", "12345678");
             given(userRepository.save(newUser)).willReturn(newUser);
             userService.save(newUser);
-            assertEquals(userService.save(newUser), newUser);
+            assertEquals(userService.save(newUser), "Usuario registrado con exito");
 
         }
         @Test
         public void findAll() {
-            User user = new User("nelson", "gonzalez", "nel@gmail.com", 12345678, "12345678", "12345678", "12345678");
+            User user = new User("nelson", "gonzalez", "nel@gmail.com", "12345678", "12345678", "12345678", "12345678");
             List<User> userList = new ArrayList<>();
             userList.add(user);
             given(userRepository.findAll()).willReturn(userList);

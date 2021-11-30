@@ -2,9 +2,7 @@ package ar.edu.unq.desapp.grupoD022021.backenddesappapi.model;
 
 
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transaction")
@@ -12,16 +10,16 @@ public class Transaction {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         int id;
-        String hour;
+        LocalDateTime hour;
         String cryptoactive;
-        int cantidad;
+        Double cantidad;
         @ManyToOne
         User usuarioVendedor;
         @ManyToOne
         User usuarioComprador;
         Boolean isFinalished=false;
         String shippingAddress;
-        int reputation;
+        double reputation;
 
     public Boolean getFinalished() {
         return isFinalished;
@@ -35,7 +33,7 @@ public class Transaction {
 
         }
 
-    public String getHour() {
+    public LocalDateTime getHour() {
         return hour;
     }
 
@@ -43,7 +41,7 @@ public class Transaction {
         return cryptoactive;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
@@ -56,7 +54,7 @@ public class Transaction {
     }
 
 
-    public void setHour(String hour) {
+    public void setHour(LocalDateTime hour) {
         this.hour = hour;
     }
 
@@ -64,7 +62,7 @@ public class Transaction {
         this.cryptoactive = cryptoactive;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -78,10 +76,14 @@ public class Transaction {
 
     public void confirm() {
         this.isFinalished=true;
-        this.usuarioComprador.sumTransactionConfirmed();
+        sumTransactionConfirmed();
+
+
     }
 
     public void cancel(){
+        sumTransactionConfirmed();
+
         this.isFinalished=true;
     }
 
@@ -111,11 +113,11 @@ public class Transaction {
         }
     }
 
-    public int getReputation() {
-        return reputation;
+    public double getReputation() {
+        return this.usuarioVendedor.getReputation();
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(double reputation) {
         this.reputation = reputation;
     }
 }
