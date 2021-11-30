@@ -48,7 +48,10 @@ public class User {
     }
 
     public User() {
-
+        this.numberOfOperations=0;
+        this.pointNegative=0.0;
+        this.awardedPoints=0;
+        this.reputation=0.0;
     }
 
     public Integer getId() {

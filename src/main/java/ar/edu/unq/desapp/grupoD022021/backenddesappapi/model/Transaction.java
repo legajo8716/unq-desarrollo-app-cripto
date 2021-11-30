@@ -82,6 +82,7 @@ public class Transaction {
     }
 
     public void cancel(){
+        sumTransactionConfirmed();
 
         this.isFinalished=true;
     }
