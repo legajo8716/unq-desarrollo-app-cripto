@@ -21,6 +21,16 @@ public class Activity {
     public Activity() {
     }
 
+    public Activity( String hour, String cryptoactive, Double cantidad, User usuario, String action, Double awardedPoints, int numberOfOperations) {
+        this.hour = hour;
+        this.cryptoactive = cryptoactive;
+        this.cantidad = cantidad;
+        this.usuario = usuario;
+        this.action = action;
+        this.awardedPoints = awardedPoints;
+        this.numberOfOperations = numberOfOperations;
+    }
+
     public int getId_activity() {
         return id_activity;
     }

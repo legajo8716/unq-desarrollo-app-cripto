@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoD022021.backenddesappapi.dto;
 
+import ar.edu.unq.desapp.grupoD022021.backenddesappapi.model.Activity;
+
 import java.util.Date;
 
 public class ActivityDto  {
@@ -18,6 +20,11 @@ public class ActivityDto  {
         public ActivityDto() {
         }
 
+        public ActivityDto(Activity activity){
+            this.hour = activity.getHour();
+            this.cryptoactive = activity.getCryptoactive();
+            this.cantidad = activity.getCantidad();
+        }
 
 
     public int getId() {
